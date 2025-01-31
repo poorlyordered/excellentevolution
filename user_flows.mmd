@@ -1,0 +1,36 @@
+flowchart TD
+    Start[User Lands on Platform] --> Auth{Authenticated?}
+    Auth -->|No| Login[Login/Register Page]
+    Login -->|Success| Dashboard
+    Auth -->|Yes| Dashboard[Dashboard]
+    
+    Dashboard --> AssessmentFlow[Take Assessments]
+    Dashboard --> ViewProgress[View Progress]
+    Dashboard --> UpdateGoals[Update Goals]
+    
+    AssessmentFlow --> MBTI[MBTI Assessment]
+    AssessmentFlow --> Enneagram[Enneagram Assessment]
+    AssessmentFlow --> StrengthsFinder[StrengthsFinder]
+    
+    MBTI & Enneagram & StrengthsFinder --> Analysis[AI Analysis]
+    Analysis --> Insights[Personalized Insights]
+    
+    Insights --> DevelopmentPlan[Development Plan Generation]
+    DevelopmentPlan --> Goals[Goal Setting]
+    
+    Goals --> QuarterlyReview[Quarterly Review]
+    QuarterlyReview --> Progress[Progress Tracking]
+    Progress --> Recommendations[AI Recommendations]
+    
+    Recommendations --> UpdateGoals
+    
+    subgraph "Coaching Interaction"
+        UpdateGoals --> CoachingSession[Schedule Coaching]
+        CoachingSession --> SessionFeedback[Session Feedback]
+        SessionFeedback --> UpdatePlan[Update Development Plan]
+    end
+    
+    style Start fill:#f9f,stroke:#333
+    style Dashboard fill:#bbf,stroke:#333
+    style Analysis fill:#bfb,stroke:#333
+    style DevelopmentPlan fill:#fbf,stroke:#333

@@ -1,0 +1,64 @@
+graph TD
+    subgraph "User Data Layer"
+        Users[(Users Table)]
+        Profiles[(User Profiles)]
+        Auth[(Auth Data)]
+    end
+    
+    subgraph "Assessment Layer"
+        Assessments[(Assessments Table)]
+        MBTI_Data[(MBTI Results)]
+        Enneagram_Data[(Enneagram Results)]
+        Strength_Data[(StrengthsFinder Results)]
+    end
+    
+    subgraph "Development Layer"
+        Goals[(Goals)]
+        Progress[(Progress Tracking)]
+        Plans[(Development Plans)]
+        Reviews[(Quarterly Reviews)]
+    end
+    
+    subgraph "AI Processing Layer"
+        AI_Analysis{AI Analysis Engine}
+        Insights{Insight Generator}
+        Recommendations{Recommendation Engine}
+    end
+    
+    subgraph "Coaching Layer"
+        Sessions[(Coaching Sessions)]
+        Resources[(Coaching Resources)]
+        Feedback[(Session Feedback)]
+    end
+    
+    %% Data Flow Relationships
+    Users --> Profiles
+    Users --> Auth
+    Users --> Assessments
+    
+    Assessments --> MBTI_Data
+    Assessments --> Enneagram_Data
+    Assessments --> Strength_Data
+    
+    MBTI_Data & Enneagram_Data & Strength_Data --> AI_Analysis
+    AI_Analysis --> Insights
+    Insights --> Plans
+    
+    Plans --> Goals
+    Goals --> Progress
+    Progress --> Reviews
+    Reviews --> Recommendations
+    
+    Users --> Sessions
+    Sessions --> Feedback
+    Sessions --> Resources
+    
+    Recommendations --> Plans
+    
+    %% Styling
+    classDef database fill:#f5f5f5,stroke:#333,stroke-width:2px
+    classDef process fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    classDef aiLayer fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    
+    class Users,Profiles,Auth,Assessments,MBTI_Data,Enneagram_Data,Strength_Data,Goals,Progress,Plans,Reviews,Sessions,Resources,Feedback database
+    class AI_Analysis,Insights,Recommendations aiLayer

@@ -1,0 +1,93 @@
+# ExcellentEvolution AI Coaching Platform Rules
+
+## Core Principles
+1. Maintain Memory Bank integrity through strict documentation
+2. Follow Next.js 14 best practices with App Router
+3. Implement MariaDB security best practices
+4. Use Zustand for global state management
+5. Enforce TypeScript strict mode
+
+## Tech Stack
+- **Frontend**: Next.js 14 (App Router) with TypeScript
+- **Database**: MariaDB with TypeORM
+- **Auth**: JWT with role-based access
+- **State**: Zustand stores
+- **Styling**: Tailwind CSS + Shadcn/ui
+- **AI**: OpenAI GPT-4 API
+
+## Architectural Patterns
+### Data Flow
+1. User Input → API Routes → AI Processing
+2. Assessment Results → Zustand Store → Plan Generation
+3. Versioned Plans → Historical Tracking → Progress Analysis
+
+### MariaDB Integration
+- Implement MySQL roles/grants for access control
+- Use TypeORM with TypeScript entities
+- Follow prepared statements for all queries
+- Enable strict mode in my.cnf
+- Use connection pooling with max limits
+- Implement query logging for security audits
+- Set up automated backups with point-in-time recovery
+
+## Database Security
+1. Separate user accounts per service tier
+2. Encrypt sensitive columns using AES-256
+3. Regular privilege audits with mysql_secure_installation
+4. Implement fail2ban for brute force protection
+5. Use SSL for all database connections
+
+
+```
+
+## Code Standards
+### Next.js Implementation
+- Use App Router structure
+- Implement server actions for data mutations
+- Use Route Handlers for API endpoints
+- Follow Next.js 14 caching strategies
+
+
+
+### AI Implementation
+- Maintain prompt engineering documentation
+- Implement rate limiting
+- Use streaming responses where applicable
+- Store analysis results in versioned plans
+
+## Documentation Requirements
+### Mandatory Files
+```
+cline_docs/
+├── productContext.md
+├── techContext.md
+├── systemPatterns.md
+├── activeContext.md
+└── progress.md
+```
+
+### Update Triggers
+- Major architectural changes
+- Technology stack updates
+- Phase transitions
+- Security model modifications
+
+## Security Protocols
+1. JWT validation for all API routes
+2. Session management through httpOnly cookies
+3. Quarterly security audits
+4. Automated dependency scanning
+
+## Testing Requirements
+- Unit tests for Zustand stores
+- Integration tests for AI workflows
+- E2E tests for auth flows
+- Performance testing for plan generation
+
+## Git Practices
+```bash
+# Commit Message Structure
+feat: MariaDB SetUp
+fix: Resolve session hydration issue
+refactor: Migrate to App Router structure
+docs: Update Memory Bank documentation

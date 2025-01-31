@@ -1,0 +1,43 @@
+graph TD
+    Home[Homepage] --> Auth[Authentication]
+    Auth --> Login[Login]
+    Auth --> Register[Register]
+    Auth --> ResetPassword[Password Reset]
+    
+    Home --> Dashboard[Dashboard]
+    
+    Dashboard --> Profile[Profile Management]
+    Profile --> Settings[User Settings]
+    Profile --> Preferences[Preferences]
+    
+    Dashboard --> Assessments[Assessments Hub]
+    Assessments --> MBTI[MBTI Assessment]
+    Assessments --> Enneagram[Enneagram Assessment]
+    Assessments --> StrengthsFinder[StrengthsFinder]
+    
+    Dashboard --> Development[Development Center]
+    Development --> Plan[Development Plan]
+    Development --> Goals[Goal Tracking]
+    Development --> Progress[Progress Dashboard]
+    
+    Dashboard --> Coaching[Coaching Center]
+    Coaching --> Schedule[Session Scheduling]
+    Coaching --> History[Session History]
+    Coaching --> Resources[Coaching Resources]
+    
+    Dashboard --> Reports[Reports & Analytics]
+    Reports --> AssessmentResults[Assessment Results]
+    Reports --> ProgressReports[Progress Reports]
+    Reports --> QuarterlyReviews[Quarterly Reviews]
+    
+    Dashboard --> Admin[Admin Panel]
+    Admin --> UserManagement[User Management]
+    Admin --> SystemSettings[System Settings]
+    Admin --> Analytics[System Analytics]
+    
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px
+    classDef section fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef feature fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    
+    class Home,Dashboard section
+    class Auth,Assessments,Development,Coaching,Reports,Admin feature
