@@ -1,113 +1,25 @@
-## Frontend Architecture
+# System Patterns
 
-### Component Architecture
-- Server/Client Component Split
-  * Root layout as server component for metadata
-  * LayoutContent as client component for navigation
-  * Auth pages as server components
-  * Interactive features as client components
+## Authentication System
 
-### Routing Strategy
-- App Router (Next.js 14)
-  * Route groups for authentication pages
-  * Dynamic route handling
-  * Middleware for auth protection (pending)
+Implemented a robust authentication system using NextAuth.js to handle user sign-in with credentials. The authentication flow includes:
 
-### State Management
-- Planned Zustand Implementation
-  * User authentication state
-  * Assessment progress
-  * Development goals
-  * Session scheduling
+- **NextAuth.js Credentials Provider**: Allows users to sign in using their email and password.
+- **Session Management**: Maintains user sessions for authenticated access.
+- **Middleware for Protected Routes**: Ensures that certain routes are accessible only to authenticated users.
+- **Environment Configuration**: Securely manages environment variables for authentication using `.env.local` and `frontend/.env`.
 
-### Navigation Patterns
-- Conditional Navigation Display
-  * Hidden for auth routes
-  * Visible for authenticated routes
-  * Responsive design with mobile menu
-  * Active state indicators
+### Workflow
 
-### Component Patterns
-- Layout Components
-  * Root layout for global structure
-  * Auth layout for login/register
-  * Shared navigation and footer
-- Page Components
-  * Consistent page structure
-  * Section-based organization
-  * Status indicators
-- UI Components
-  * Card-based layouts
-  * Progress indicators
-  * Action buttons
-  * Form elements
+1. **Login Page**: Users enter their credentials, which are validated by NextAuth.js.
+2. **Session Provider**: Wraps the application to provide session context.
+3. **Middleware**: Protects routes by checking for valid authentication tokens.
+4. **Error Handling**: Properly handles authentication errors and redirects.
 
-### Authentication Flow
-- Route Protection (Planned)
-  * NextAuth.js integration
-  * Protected routes
-  * Role-based access
-  * Session management
+### Technologies Used
 
-### Data Flow
-- Planned Implementation
-  * API routes for backend communication
-  * Data fetching in server components
-  * Client-side state updates
-  * Real-time updates where needed
-
-### Styling Patterns
-- Tailwind CSS Implementation
-  * Utility-first approach
-  * Responsive design classes
-  * Component-specific styles
-  * Theme consistency
-
-### Error Handling
-- Planned Implementation
-  * Form validation
-  * API error handling
-  * Loading states
-  * Error boundaries
-
-### Performance Patterns
-- Optimization Strategies
-  * Server components for static content
-  * Client components for interactivity
-  * Route-based code splitting
-  * Image optimization
-
-### Security Patterns
-- Planned Implementation
-  * CSRF protection
-  * XSS prevention
-  * Secure authentication
-  * Input sanitization
-
-### Testing Strategy (Planned)
-- Unit Tests
-  * Component testing
-  * Utility function testing
-- Integration Tests
-  * Page functionality
-  * User flows
-- E2E Tests
-  * Critical paths
-  * User journeys
-
-### Monitoring (Planned)
-- Performance Monitoring
-  * Page load times
-  * Component render times
-  * API response times
-- Error Tracking
-  * Client-side errors
-  * API failures
-  * Authentication issues
-
-### Deployment Strategy (Planned)
-- CI/CD Pipeline
-  * Automated testing
-  * Build optimization
-  * Environment configuration
-  * Deployment automation
+- **NextAuth.js**: Provides authentication mechanisms.
+- **React**: For building user interface components.
+- **Next.js**: Framework facilitating server-side rendering and routing.
+- **TypeScript**: Ensures type safety and better developer experience.
+- **MariaDB**: Serves as the database for storing user and platform data.
