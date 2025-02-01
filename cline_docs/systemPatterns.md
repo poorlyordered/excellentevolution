@@ -29,6 +29,36 @@ Implemented a comprehensive authentication system using Clerk.com to handle user
    - Session management hooks
    - User data synchronization with MariaDB
 
+## Email System
+
+Implemented a transactional email system using Resend to handle all email communications:
+
+- **Resend Integration**: Modern email delivery service with high deliverability
+- **Email Templates**: React-based email templates for consistent branding
+- **Event-Based Triggers**: Automated emails based on user actions and system events
+- **Environment Configuration**: Managed through Resend dashboard and local environment variables
+
+### Email Workflows
+
+1. **Transactional Emails**:
+   - Welcome emails after registration
+   - Password reset notifications
+   - Assessment completion confirmations
+   - Coaching session reminders
+   - Progress report notifications
+
+2. **Security Features**:
+   - SPF and DKIM authentication
+   - Email verification
+   - Anti-spam compliance
+   - Delivery monitoring
+
+3. **Integration Points**:
+   - React email components
+   - Next.js API routes
+   - Event-based triggers
+   - Email analytics and tracking
+
 ### Technologies Used
 
 - **Clerk.com**: Primary authentication provider
@@ -36,3 +66,4 @@ Implemented a comprehensive authentication system using Clerk.com to handle user
 - **Next.js**: Framework for server-side rendering and routing
 - **TypeScript**: Type safety and developer experience
 - **MariaDB**: Database for user and platform data
+- **Resend**: Transactional email service
