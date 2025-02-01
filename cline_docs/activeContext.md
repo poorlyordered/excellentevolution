@@ -5,7 +5,8 @@
 - Implemented Clerk middleware for route protection
 - Added Clerk's SignIn and SignUp components with catch-all routes
 - Configured proper redirects and UI customization
-- Removed old NextAuth.js files and dependencies
+- Removed all NextAuth.js files and dependencies
+- Cleaned up environment variables configuration
 
 ## Recent Changes
 - Created feature branch 'feature/clerk-authentication'
@@ -15,6 +16,10 @@
 - Updated middleware.ts for Clerk authentication
 - Removed NextAuth.js related files and configurations
 - Customized Clerk components with Tailwind styling
+- Consolidated environment variables:
+  * Database config in root .env.local
+  * Clerk auth config in frontend/.env
+  * Simplified frontend/.env.local
 
 ## Next Steps
 - Test authentication flows end-to-end with real users
