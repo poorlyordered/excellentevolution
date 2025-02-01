@@ -3,15 +3,16 @@
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: Zustand
-- **Authentication**: NextAuth.js
+- **Authentication**: Clerk.com
 - **UI Components**: Custom components with Tailwind
 
 ### Authentication System
-- **Library**: NextAuth.js
-- **Providers**: Credentials Provider for email and password authentication
-- **Session Management**: Managed via NextAuth.js sessions
-- **Middleware**: Protects routes by verifying authentication tokens
-- **Environment Variables**: Configured in `.env.local` and `frontend/.env` for secure management
+- **Library**: Clerk.com (@clerk/nextjs)
+- **Providers**: Email authentication (expandable to social providers)
+- **Session Management**: Managed via Clerk's secure session system
+- **Middleware**: Clerk's built-in middleware for route protection
+- **Environment Variables**: Managed through Clerk dashboard and local configuration
+- **Security**: Built-in password policies, brute force protection, rate limiting
 
 ### Development Environment
 ```bash
@@ -48,7 +49,7 @@ frontend/
 {
   "dependencies": {
     "next": "15.1.6",
-    "next-auth": "^4.24.11",
+    "@clerk/nextjs": "^5.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zustand": "^5.0.3"
@@ -91,9 +92,13 @@ npm run lint
 
 ### Environment Variables
 ```env
-# Authentication
-NEXTAUTH_URL=http://localhost:3002
-NEXTAUTH_SECRET=n5bfn9hcwDL8jG58bZomDHt/X6zszKfGEWMOp2fhNNY=
+# Authentication (Clerk)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
+CLERK_SECRET_KEY=your_secret_key
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/login
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/register
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 
 # Database
 DATABASE_URL=mysql://coaching_app_user:Tray4-Unraveled2-Snaking1-Jogging1@localhost:3306/professional_coaching_db
@@ -110,10 +115,11 @@ DATABASE_URL=mysql://coaching_app_user:Tray4-Unraveled2-Snaking1-Jogging1@localh
 - Lighthouse Score: > 90
 
 ### Security Configuration
-- CSRF Protection via NextAuth.js
+- Built-in CSRF Protection via Clerk
 - XSS Prevention through proper input sanitization
 - Content Security Policy (CSP) headers
 - Secure Headers implementation
+- Brute force protection and rate limiting via Clerk
 
 ### Testing Setup
 - **Unit Testing**: Jest
@@ -130,11 +136,13 @@ DATABASE_URL=mysql://coaching_app_user:Tray4-Unraveled2-Snaking1-Jogging1@localh
 - SSL/TLS certificate
 - Environment variables configured
 - Build artifacts generated via `npm run build`
+- Clerk.com account and configuration
 
 ### Monitoring Tools
 - **Error Tracking**: Sentry (planned)
 - **Performance Monitoring**: Lighthouse CI (planned)
 - **Usage Analytics**: Google Analytics (planned)
+- **Authentication Analytics**: Clerk Dashboard
 
 ### Development Workflow
 1. Local development on `localhost:3002`
@@ -148,3 +156,4 @@ DATABASE_URL=mysql://coaching_app_user:Tray4-Unraveled2-Snaking1-Jogging1@localh
 - **Type-Safe API Calls**: Utilizing TypeScript for type safety
 - **Error Handling**: Comprehensive error handling mechanisms
 - **Response Caching**: Implemented where necessary for performance
+- **Authentication**: Clerk hooks and components for secure API access

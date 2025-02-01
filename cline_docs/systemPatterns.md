@@ -2,24 +2,37 @@
 
 ## Authentication System
 
-Implemented a robust authentication system using NextAuth.js to handle user sign-in with credentials. The authentication flow includes:
+Implemented a comprehensive authentication system using Clerk.com to handle user authentication. The authentication flow includes:
 
-- **NextAuth.js Credentials Provider**: Allows users to sign in using their email and password.
-- **Session Management**: Maintains user sessions for authenticated access.
-- **Middleware for Protected Routes**: Ensures that certain routes are accessible only to authenticated users.
-- **Environment Configuration**: Securely manages environment variables for authentication using `.env.local` and `frontend/.env`.
+- **Clerk Authentication**: Provides secure user authentication with built-in best practices
+- **Session Management**: Handled by Clerk's secure session system
+- **Protected Routes**: Using Clerk's middleware for route protection
+- **Environment Configuration**: Managed through Clerk dashboard and local environment variables
 
 ### Workflow
 
-1. **Login Page**: Users enter their credentials, which are validated by NextAuth.js.
-2. **Session Provider**: Wraps the application to provide session context.
-3. **Middleware**: Protects routes by checking for valid authentication tokens.
-4. **Error Handling**: Properly handles authentication errors and redirects.
+1. **Authentication Flow**:
+   - User registration with email (expandable to social logins)
+   - Secure login with Clerk's components
+   - Password reset and account management
+   - Session handling and token management
+
+2. **Security Features**:
+   - Built-in password security and validation
+   - Brute force protection
+   - Rate limiting
+   - Account lockout mechanisms
+
+3. **Integration Points**:
+   - Clerk components for UI
+   - Middleware for route protection
+   - Session management hooks
+   - User data synchronization with MariaDB
 
 ### Technologies Used
 
-- **NextAuth.js**: Provides authentication mechanisms.
-- **React**: For building user interface components.
-- **Next.js**: Framework facilitating server-side rendering and routing.
-- **TypeScript**: Ensures type safety and better developer experience.
-- **MariaDB**: Serves as the database for storing user and platform data.
+- **Clerk.com**: Primary authentication provider
+- **@clerk/nextjs**: React components and hooks
+- **Next.js**: Framework for server-side rendering and routing
+- **TypeScript**: Type safety and developer experience
+- **MariaDB**: Database for user and platform data
