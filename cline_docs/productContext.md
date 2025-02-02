@@ -21,14 +21,17 @@ AI-powered professional development platform that provides personalized career g
   * Personality type evaluation
   * 45-60 minute completion time
   * Detailed type analysis
+  * Affiliate link referral for new assessments
 - Enneagram Assessment
   * Core motivations analysis
   * 30-40 minute completion time
   * Wing and instinct identification
+  * Affiliate link referral for new assessments
 - StrengthsFinder
   * Talent identification
   * 35-45 minute completion time
   * Top 5 strengths analysis
+  * Affiliate link referral for new assessments
 
 #### Development Planning
 - Goal setting and tracking
