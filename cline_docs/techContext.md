@@ -1,4 +1,53 @@
-### Frontend Stack
+# Technical Context
+
+## Code Style and Structure
+### General Principles
+- Write concise, readable TypeScript code
+- Use functional and declarative programming patterns
+- Follow DRY (Don't Repeat Yourself) principle
+- Implement early returns for better readability
+- Structure components logically: exports, subcomponents, helpers, types
+
+### Naming Conventions
+- Use descriptive names with auxiliary verbs (isLoading, hasError)
+- Prefix event handlers with "handle" (handleClick, handleSubmit)
+- Use lowercase with dashes for directories (components/auth-wizard)
+- Favor named exports for components
+
+### TypeScript Usage
+- Use TypeScript for all code
+- Prefer interfaces over types
+- Avoid enums; use const maps instead
+- Implement proper type safety and inference
+- Use `satisfies` operator for type validation
+
+## React 19 and Next.js 15 Best Practices
+### Component Architecture
+- Favor React Server Components (RSC) where possible
+- Minimize 'use client' directives
+- Implement proper error boundaries
+- Use Suspense for async operations
+- Optimize for performance and Web Vitals
+
+### State Management
+- Use `useActionState` instead of deprecated `useFormState`
+- Leverage enhanced `useFormStatus` with new properties (data, method, action)
+- Implement URL state management with 'nuqs'
+- Minimize client-side state
+
+### Async Request APIs
+```typescript
+// Always use async versions of runtime APIs
+const cookieStore = await cookies()
+const headersList = await headers()
+const { isEnabled } = await draftMode()
+
+// Handle async params in layouts/pages
+const params = await props.params
+const searchParams = await props.searchParams
+```
+
+## Frontend Stack
 - **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
@@ -6,7 +55,7 @@
 - **Authentication**: Clerk.com
 - **UI Components**: Custom components with Tailwind
 
-### Database Layer
+## Database Layer
 - **Database**: MariaDB
 - **ORM**: Prisma
 - **Schema**: Type-safe schema with custom types for assessments
@@ -14,7 +63,7 @@
 - **Connection**: Pooled database connections via Prisma Client
 - **Type Safety**: Full TypeScript integration with Prisma-generated types
 
-### Authentication System
+## Authentication System
 - **Library**: Clerk.com (@clerk/nextjs)
 - **Providers**: Email authentication (expandable to social providers)
 - **Session Management**: Managed via Clerk's secure session system
@@ -22,7 +71,7 @@
 - **Environment Variables**: Managed through Clerk dashboard and local configuration
 - **Security**: Built-in password policies, brute force protection, rate limiting
 
-### Development Environment
+## Development Environment
 ```bash
 # Required Tools
 Node.js v22.13.1
@@ -55,7 +104,7 @@ frontend/
 └── public/
 ```
 
-### Dependencies
+## Dependencies
 ```json
 {
   "dependencies": {
@@ -81,7 +130,7 @@ frontend/
 }
 ```
 
-### Configuration Files
+## Configuration Files
 - **next.config.js**: Next.js configuration
 - **tsconfig.json**: TypeScript configuration
 - **tailwind.config.js**: Tailwind CSS configuration
@@ -90,7 +139,7 @@ frontend/
 - **frontend/.env**: Additional environment variables
 - **prisma/schema.prisma**: Database schema and Prisma configuration
 
-### Development Commands
+## Development Commands
 ```bash
 # Start development server
 npm run dev
@@ -114,7 +163,7 @@ npx prisma migrate dev
 npx prisma migrate deploy
 ```
 
-### Environment Variables
+## Environment Variables
 ```env
 # Authentication (Clerk)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key
@@ -131,17 +180,17 @@ DATABASE_URL=mysql://coaching_app_user:Tray4-Unraveled2-Snaking1-Jogging1@localh
 RESEND_API_KEY=your_resend_api_key
 ```
 
-### Browser Support
+## Browser Support
 - Modern browsers (Chrome, Firefox, Safari, Edge)
 - Mobile browsers
 - No IE11 support required
 
-### Performance Targets
+## Performance Targets
 - First Contentful Paint: < 1.5s
 - Time to Interactive: < 3.5s
 - Lighthouse Score: > 90
 
-### Security Configuration
+## Security Configuration
 - Built-in CSRF Protection via Clerk
 - XSS Prevention through proper input sanitization
 - Content Security Policy (CSP) headers
@@ -149,19 +198,19 @@ RESEND_API_KEY=your_resend_api_key
 - Brute force protection and rate limiting via Clerk
 - Type-safe database queries via Prisma
 
-### Testing Setup
+## Testing Setup
 - **Unit Testing**: Jest
 - **Component Testing**: React Testing Library
 - **End-to-End Testing**: Cypress
 - **Database Testing**: Prisma's integrated testing utilities
 
-### Code Quality Tools
+## Code Quality Tools
 - **Linting**: ESLint
 - **Formatting**: Prettier
 - **Type Checking**: TypeScript
 - **Schema Validation**: Prisma schema validation
 
-### Deployment Requirements
+## Deployment Requirements
 - Node.js runtime
 - SSL/TLS certificate
 - Environment variables configured
@@ -169,14 +218,14 @@ RESEND_API_KEY=your_resend_api_key
 - Clerk.com account and configuration
 - MariaDB instance with migrations applied
 
-### Monitoring Tools
+## Monitoring Tools
 - **Error Tracking**: Sentry (planned)
 - **Performance Monitoring**: Lighthouse CI (planned)
 - **Usage Analytics**: Google Analytics (planned)
 - **Authentication Analytics**: Clerk Dashboard
 - **Database Monitoring**: Prisma Studio
 
-### Development Workflow
+## Development Workflow
 1. Local development on `localhost:3002`
 2. Code linting and type checking
 3. Automated testing
@@ -184,7 +233,7 @@ RESEND_API_KEY=your_resend_api_key
 5. Database migrations
 6. Deployment
 
-### API Integration
+## API Integration
 - **Endpoints**: RESTful API endpoints for various functionalities
 - **Type-Safe API Calls**: Utilizing TypeScript for type safety
 - **Error Handling**: Comprehensive error handling mechanisms

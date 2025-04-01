@@ -1,5 +1,27 @@
 # System Patterns
 
+## Architectural Patterns
+### Data Flow
+1. User Input → API Routes → AI Processing  
+2. Assessment Results → Zustand Store → Plan Generation  
+3. Versioned Plans → Historical Tracking → Progress Analysis  
+
+### MariaDB Integration
+- Implement MySQL roles/grants for access control  
+- Use TypeORM with TypeScript entities  
+- Follow prepared statements for all queries  
+- Enable strict mode in my.cnf  
+- Use connection pooling with max limits  
+- Implement query logging for security audits  
+- Set up automated backups with point-in-time recovery  
+
+### Database Security
+1. Separate user accounts per service tier  
+2. Encrypt sensitive columns using AES-256  
+3. Regular privilege audits with mysql_secure_installation  
+4. Implement fail2ban for brute force protection  
+5. Use SSL for all database connections  
+
 ## Authentication and User Management
 - Using Clerk for authentication and user management
 - Email/password authentication enabled
