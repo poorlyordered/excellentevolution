@@ -1,111 +1,21 @@
-### Vision
-AI-powered professional development platform that provides personalized career growth through integrated assessments, intelligent coaching, and data-driven insights.
+# Product Context: Excellent Evolution
 
-### Core Value Proposition
-- Comprehensive personality and strength assessments
-- AI-driven development planning
-- Progress tracking and analytics
-- Professional coaching integration
-- Personalized learning paths
+## Why It Exists
+Professionals often lack accessible, self-directed tools to guide their career growth, relying on coaches or generic resources. Excellent Evolution offers a self-serve solution with validated assessments and AI insights to foster exceptional personal and professional evolution.
 
-### Key Features
+## Problems It Solves
+- Uncertainty about personality, interests, behaviors, emotions, and values affecting career choices.
+- Lack of structure for self-driven career planning and progress tracking.
+- Limited gamified motivation for personal development.
 
-#### Authentication & User Management
-- User registration and login
-- Profile management
-- Privacy settings
-- Role-based access control
+## How It Works
+- Users complete a guided assessment flow (Big Five → optional 16PF → Holland Code → DiSC → TalentSmartEQ EI → Career Values Scale), entering scores from external sites.
+- AI (Sonnet 3.7) generates personalized recommendations, visualized in standard or gamified views (e.g., levels, badges).
+- Calendar integration schedules check-ins for goal updates and reflection.
+- Progress is tracked quarterly, with exportable summaries.
 
-#### Assessment Hub
-- MBTI Assessment
-  * Personality type evaluation
-  * 45-60 minute completion time
-  * Detailed type analysis
-  * Affiliate link referral for new assessments
-- Enneagram Assessment
-  * Core motivations analysis
-  * 30-40 minute completion time
-  * Wing and instinct identification
-  * Affiliate link referral for new assessments
-- StrengthsFinder
-  * Talent identification
-  * 35-45 minute completion time
-  * Top 5 strengths analysis
-  * Affiliate link referral for new assessments
-
-#### Development Planning
-- Goal setting and tracking
-- Progress visualization
-- Quarterly objectives
-- AI-powered recommendations
-- Skill development roadmap
-
-#### Coaching Integration
-- Session scheduling
-- Progress documentation
-- Resource library
-- Coach-client communication
-- Session history tracking
-
-#### Analytics & Reporting
-- Assessment results visualization
-- Progress tracking metrics
-- Development insights
-- Performance analytics
-- Quarterly review summaries
-
-### User Experience
-- Clean, professional interface
-- Intuitive navigation
-- Mobile-responsive design
-- Accessible UI components
-- Progress indicators
-
-### Technical Architecture
-- Next.js frontend
-- MariaDB backend
-- RESTful API
-- Real-time updates
-- Secure data handling
-
-### Security Features
-- Encrypted data storage
-- Secure authentication
-- Privacy controls
-- Data protection
-- Access management
-
-### Integration Points
-- Calendar systems
-- Email notifications
-- Document generation
-- Analytics tools
-- Learning platforms
-
-### Future Enhancements
-- Additional assessment types
-- AI coaching assistance
-- Team development features
-- Advanced analytics
-- Learning resource integration
-
-### Success Metrics
-- User engagement
-- Assessment completion rates
-- Goal achievement
-- Coaching effectiveness
-- User satisfaction
-
-### Target Users
-- Professionals seeking growth
-- Career changers
-- Leadership aspirants
-- Personal development enthusiasts
-- Professional coaches
-
-### Competitive Advantages
-- Integrated assessment suite
-- AI-powered insights
-- Professional coaching
-- Progress tracking
-- Personalized development
+## User Experience Goals
+- Sleek, self-guided interface with mobile responsiveness (Next.js 15, Shadcn UI, Radix UI, Tailwind CSS).
+- Intuitive flow with optional gamification (e.g., progress bars, achievements).
+- Accessible design (WCAG 2.1) with clear calendar prompts.
+- Transparent affiliate links for assessments and future courses (e.g., Udemy).

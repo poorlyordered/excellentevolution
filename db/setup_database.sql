@@ -7,7 +7,7 @@ CREATE DATABASE IF NOT EXISTS professional_coaching_db;
 USE professional_coaching_db;
 
 -- Create application user with limited privileges
-CREATE USER IF NOT EXISTS 'coaching_app_user'@'localhost' IDENTIFIED BY 'REPLACE_WITH_SECURE_PASSWORD';
+CREATE USER IF NOT EXISTS 'coaching_app_user'@'localhost' IDENTIFIED BY 'Tray4-Unraveled2-Snaking1-Jogging1';
 
 -- Grant necessary privileges
 GRANT SELECT, INSERT, UPDATE, DELETE 

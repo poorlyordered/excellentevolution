@@ -28,7 +28,7 @@ model Assessment {
   userId           String      @map("user_id") @db.Char(36)
   type             AssessmentType
   rawResults       Json        @map("raw_results")
-  processedInsights String[]   @map("processed_insights")
+  processedInsights Json       @map("processed_insights")
   createdAt        DateTime    @default(now()) @map("created_at")
   user             User        @relation(fields: [userId], references: [id])
 
