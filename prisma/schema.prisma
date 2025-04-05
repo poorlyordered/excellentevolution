@@ -43,7 +43,10 @@ enum UserRole {
 }
 
 enum AssessmentType {
-  MBTI
-  Enneagram
-  StrengthsFinder
+  BIG_FIVE
+  SIXTEEN_PF
+  HOLLAND_CODE
+  DISC
+  TALENTSMART_EQ
+  CAREER_VALUES
 }

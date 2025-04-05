@@ -14,6 +14,15 @@
   - Parameterized query execution
   - Schema inspection tools
   - Connection pooling
+- Updated database schema to replace MBTI, Enneagram, StrengthsFinder with:
+  - Big Five (OCEAN)
+  - 16PF (optional)
+  - Holland Code (RIASEC)
+  - DiSC
+  - TalentSmartEQ EI Appraisal
+  - Career Values Scale
+- Applied Prisma migration and regenerated client to support new assessment types.
+
 
 ## Next Steps
 - Design gamification elements (e.g., levels, badges) for development view
