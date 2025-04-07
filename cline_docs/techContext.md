@@ -25,13 +25,16 @@
 ## Dependencies
 - External APIs: Google Calendar (check-ins), Udemy (future courses)
 - Libraries:
-  - Vercel AI SDK, Radix UI primitives, Clerk React, Resend SDK
+  - Vercel AI SDK (`ai`, `@ai-sdk/anthropic`), Anthropic SDK (`@anthropic-ai/sdk`)
+  - Radix UI primitives (`@radix-ui/react-slot`, `@radix-ui/react-scroll-area`)
+  - Clerk React, Resend SDK, Sonner (notifications), Lucide React (icons)
   - MariaDB Node.js driver
   - Model Context Protocol SDK
 
 ## Tool Usage Patterns
 - TypeScript for strict typing in React 19 components
-- Vercel AI SDK for prompting Sonnet 3.7 with assessment data
+- Vercel AI SDK (`streamText` with `createAnthropic` provider) for AI chat interactions via API routes
+- Vercel AI SDK (`useChat` hook) for managing chat state in the frontend
 - Tailwind CSS for rapid, responsive styling with Shadcn UI
 - MCP tools for secure database operations:
   - execute_query: Parameterized SQL execution

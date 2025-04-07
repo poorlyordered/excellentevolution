@@ -25,13 +25,13 @@
 
 ## Component Relationships
 - Next.js Pages → React Components (Shadcn UI/Radix UI) → Tailwind CSS styling
-- Vercel AI SDK → Sonnet 3.7 LLM → Client-side recommendation display
+- Vercel AI SDK (via `/api/ai/chat` route) → Sonnet 3.7 LLM → `useAIRecommendations` hook → `AIChatInterface` component
 - Calendar API → Next.js API Routes → User progress updates
 - MCP Server → MariaDB → Prisma ORM → Type-safe database operations
-
 ## Critical Implementation Paths
 1. Auth setup with Clerk.com → Next.js middleware → Secure score storage
 2. Assessment score forms → LLM processing via Vercel AI SDK → Gamified/standard views
 3. Calendar check-in scheduler → AI-driven prompts → Analytics refresh
 4. User signup → Resend welcome email → Engagement tracking
 5. Database operations → MCP server → Parameterized queries → Secure data access
+6. AI Chat: `AIChatInterface` → `useAIRecommendations` hook → `/api/ai/chat` route → Vercel AI SDK → Sonnet 3.7 LLM → Streaming response
