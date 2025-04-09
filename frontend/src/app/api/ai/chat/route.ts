@@ -1,8 +1,11 @@
 // frontend/src/app/api/ai/chat/route.ts
-import { Anthropic } from '@anthropic-ai/sdk'; // Re-import for error type checking
+import { Anthropic } from '@anthropic-ai/sdk';
 import { createAnthropic } from '@ai-sdk/anthropic';
-import { streamText } from 'ai';
+import { streamText, CoreMessage } from 'ai'; // Import CoreMessage
 import { NextResponse } from 'next/server';
+import { auth } from '@clerk/nextjs/server';
+import { prisma } from '@/lib/prisma';
+import { AssessmentType, Prisma } from '@prisma/client'; // Import necessary types
 
 // Initialize the Anthropic provider instance
 const anthropic = createAnthropic({
@@ -14,29 +17,78 @@ const anthropic = createAnthropic({
 export const runtime = 'edge';
 
 // Define a system prompt for the AI Coach
-const systemPrompt = `You are an expert AI Professional Development Coach named 'Evo'.
-Your goal is to provide insightful, supportive, and actionable career advice based on user inputs, assessment results, and development plans.
+const baseSystemPrompt = `You are an expert AI Professional Development Coach named 'Evo'.
+Your goal is to provide insightful, supportive, and actionable career advice based on user inputs and the provided context (assessment results, development plans).
 Be encouraging, ask clarifying questions when needed, and help users reflect on their goals and progress.
 Reference the user's context (assessments, plans) when relevant, but maintain a conversational tone.
 Keep responses concise and focused unless asked for detailed explanations.`;
 
 export async function POST(req: Request) {
   try {
-    const { messages } = await req.json();
+    // --- 1. Authentication ---
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
-    // Use streamText with the Anthropic provider
+    // --- 2. Parse Request Body ---
+    const { messages }: { messages: CoreMessage[] } = await req.json(); // Type messages
+
+    // --- 3. Fetch User Context ---
+    let userContext = "";
+    try {
+      // Fetch latest development plan
+      const latestPlan = await prisma.developmentPlan.findFirst({
+        where: { userId: userId },
+        orderBy: { updatedAt: 'desc' },
+      });
+      if (latestPlan) {
+        userContext += `\n\n## Latest Development Plan (Summary):\n${latestPlan.content.substring(0, 500)}...\n`; // Add a summary
+      }
+
+      // Fetch assessment insights (example: fetching all for simplicity, might need refinement)
+      const assessments = await prisma.assessment.findMany({
+        where: { userId: userId },
+        select: { type: true, processedInsights: true }, // Select only needed fields
+      });
+      if (assessments.length > 0) {
+        userContext += "\n## Assessment Insights:\n";
+        assessments.forEach((assessment: { type: AssessmentType; processedInsights: Prisma.JsonValue | null }) => { // Use imported types
+          // Safely access processedInsights, assuming it's JSON or stringifiable
+          let insights = "No insights processed.";
+          if (assessment.processedInsights) {
+             try {
+                // Attempt to stringify if it's an object, otherwise use as is if string
+                insights = typeof assessment.processedInsights === 'object'
+                    ? JSON.stringify(assessment.processedInsights)
+                    : String(assessment.processedInsights);
+             } catch {
+                insights = "Could not parse insights.";
+             }
+          }
+          userContext += `- ${assessment.type}: ${insights.substring(0, 200)}...\n`; // Add summaries
+        });
+      }
+    } catch (dbError) {
+      console.error("Error fetching user context:", dbError);
+      // Proceed without context, or return an error depending on requirements
+      userContext = "\n\n[Note: Could not retrieve user context due to an error.]";
+    }
+
+    // --- 4. Construct Final System Prompt ---
+    const finalSystemPrompt = `${baseSystemPrompt}\n\n## User Context:${userContext || "\nNo specific context available."}`;
+
+
+    // --- 5. Call AI ---
     const result = await streamText({
-      // Model selection - Use the appropriate Sonnet 3.x model available
-      // Check Anthropic documentation or Vercel AI SDK for the latest model names
-      // Example: 'claude-3-sonnet-20240229'
-      model: anthropic('claude-3-sonnet-20240229'), // Use the provider instance directly
-      system: systemPrompt, // Pass system prompt directly
-      messages: messages, // Pass user/assistant messages
-      maxTokens: 1024, // Renamed parameter
+      model: anthropic('claude-3-5-sonnet-20240620'), // Updated model
+      system: finalSystemPrompt, // Pass augmented system prompt
+      messages: messages,
+      maxTokens: 1024,
     });
 
     // Convert the result stream to a StreamingTextResponse
-    return result.toTextStreamResponse();
+    return result.toTextStreamResponse(); // Correct method for text streaming
 
   } catch (error: unknown) { // Explicitly type error as unknown
     console.error("Error in AI chat route:", error);

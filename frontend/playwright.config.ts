@@ -1,0 +1,104 @@
+import { defineConfig, devices } from '@playwright/test';
+
+// Use process.env.PORT or default to 3000
+const PORT = process.env.PORT || 3000;
+
+// Set webServer.url and use.baseURL with the dynamically assigned port
+const baseURL = `http://localhost:${PORT}`;
+
+/**
+ * Read environment variables from file.
+ * https://github.com/motdotla/dotenv
+ */
+// require('dotenv').config();
+
+/**
+ * See https://playwright.dev/docs/test-configuration.
+ */
+export default defineConfig({
+  testDir: './tests/e2e', // Directory where E2E tests are located
+  /* Run tests in files in parallel */
+  fullyParallel: true,
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
+  forbidOnly: !!process.env.CI,
+  /* Retry on CI only */
+  retries: process.env.CI ? 2 : 0,
+  /* Opt out of parallel tests on CI. */
+  workers: process.env.CI ? 1 : undefined,
+  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+  reporter: [
+    ['list'], // Simple list reporter
+    ['html', { open: 'never' }] // HTML reporter, don't open automatically
+  ],
+  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  use: {
+    /* Base URL to use in actions like `await page.goto('/')`. */
+    baseURL: baseURL,
+
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on-first-retry', // Record trace on the first retry of a failed test
+  },
+
+  /* Configure projects for major browsers */
+  projects: [
+    {
+      name: 'chromium',
+      use: {
+        ...devices['Desktop Chrome'],
+        // Use prepared auth state.
+        storageState: './playwright/.auth/user.json',
+      },
+    },
+
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+        // Use prepared auth state.
+        storageState: './playwright/.auth/user.json',
+      },
+    },
+
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
+        // Use prepared auth state.
+        storageState: './playwright/.auth/user.json',
+      },
+    },
+
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
+    /* Test against branded browsers. */
+    // {
+    //   name: 'Microsoft Edge',
+    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    // },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    // },
+  ],
+
+  /* Run your local dev server before starting the tests */
+  webServer: {
+    command: 'npm run dev', // Command to start the Next.js dev server
+    url: baseURL, // URL to poll to ensure the server is ready
+    reuseExistingServer: !process.env.CI, // Reuse existing server locally, start fresh on CI
+    stdout: 'pipe', // Pipe stdout for logging
+    stderr: 'pipe', // Pipe stderr for logging
+    timeout: 120 * 1000, // Increase timeout for server startup
+  },
+
+  // Optional: Global setup for tasks like authentication
+  globalSetup: require.resolve('./tests/e2e/global.setup.ts'),
+});

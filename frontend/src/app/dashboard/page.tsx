@@ -1,6 +1,7 @@
 'use client'
 
 import { useUser, SignOutButton } from "@clerk/nextjs";
+import { ReviewInputForm } from "@/components/reviews/ReviewInputForm"; // Import the form
 
 export default function DashboardPage() {
   const { user } = useUser();
@@ -26,17 +27,26 @@ export default function DashboardPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Assessments</h2>
             <div className="space-y-3">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">MBTI Assessment</span>
-                <span className="text-blue-600">Not Started</span>
+                <span className="text-gray-600">Big Five (OCEAN)</span>
+                <span className="text-blue-600">Not Started</span> {/* TODO: Fetch actual status */}
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Enneagram</span>
-                <span className="text-blue-600">Not Started</span>
+                <span className="text-gray-600">Holland Code (RIASEC)</span>
+                <span className="text-blue-600">Not Started</span> {/* TODO: Fetch actual status */}
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">StrengthsFinder</span>
-                <span className="text-blue-600">Not Started</span>
+                <span className="text-gray-600">DiSC</span>
+                <span className="text-blue-600">Not Started</span> {/* TODO: Fetch actual status */}
               </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">TalentSmartEQ EI</span>
+                <span className="text-blue-600">Not Started</span> {/* TODO: Fetch actual status */}
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-gray-600">Career Values Scale</span>
+                <span className="text-blue-600">Not Started</span> {/* TODO: Fetch actual status */}
+              </div>
+              {/* Optional: 16PF can be added here if logic allows */}
             </div>
             <a
               href="/assessments"
@@ -78,6 +88,11 @@ export default function DashboardPage() {
             >
               Schedule a Session →
             </a>
+          </div>
+
+          {/* Quarterly Review Input Card */}
+          <div className="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-1"> {/* Adjust span as needed */}
+            <ReviewInputForm />
           </div>
         </div>
 

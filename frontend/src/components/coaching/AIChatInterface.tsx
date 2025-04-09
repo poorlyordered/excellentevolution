@@ -2,16 +2,22 @@
 'use client'; // Required for hooks
 
 import React from 'react';
-import { useAIRecommendations } from '@/hooks/useAIRecommendations'; // Adjust path if needed
-import { Input } from '@/components/ui/input'; // Assuming Shadcn UI Input
-import { Button } from '@/components/ui/button'; // Assuming Shadcn UI Button
-import { ScrollArea } from '@/components/ui/scroll-area'; // Assuming Shadcn UI ScrollArea
-import { Send } from 'lucide-react'; // Icon
+import { useAIRecommendations } from '@/hooks/useAIRecommendations';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Send, FileText } from 'lucide-react'; // Added FileText icon
+import { analyzeLatestReview } from '@/actions/reviewActions'; // Import the new action
+import { toast } from 'sonner'; // Import toast
 
 export function AIChatInterface() {
   const { messages, input, handleInputChange, handleSubmit, isLoading } = useAIRecommendations();
   // Ref for the ScrollArea root element
   const scrollAreaRef = React.useRef<React.ElementRef<typeof ScrollArea>>(null);
+  // State for review analysis
+  const [analysisResult, setAnalysisResult] = React.useState<string | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = React.useState(false);
+  const [analysisError, setAnalysisError] = React.useState<string | null>(null);
 
   // Scroll to bottom when new messages arrive
    React.useEffect(() => {
@@ -25,9 +31,31 @@ export function AIChatInterface() {
     }
   }, [messages]);
 
-
+  // Handler for analyzing the latest review
+  const handleAnalyzeReview = async () => {
+    setIsAnalyzing(true);
+    setAnalysisResult(null);
+    setAnalysisError(null);
+    try {
+      const result = await analyzeLatestReview();
+      if (result.success) {
+        setAnalysisResult(result.analysis ?? "No analysis returned.");
+        toast.success("Review analysis complete.");
+      } else {
+        setAnalysisError(result.error ?? "Failed to analyze review.");
+        toast.error(result.error ?? "Failed to analyze review.");
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "An unexpected error occurred.";
+      setAnalysisError(message);
+      toast.error(`Analysis error: ${message}`);
+      console.error("Analyze review exception:", error);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
   return (
-    <div className="flex flex-col h-[500px] border rounded-lg p-4 space-y-4 bg-background">
+    <div className="flex flex-col h-[700px] border rounded-lg p-4 space-y-4 bg-background"> {/* Increased height */}
       {/* Pass the ref to the ScrollArea root */}
       <ScrollArea className="flex-grow pr-4" ref={scrollAreaRef}>
         <div className="space-y-4">
@@ -60,6 +88,20 @@ export function AIChatInterface() {
           )}
         </div>
       </ScrollArea>
+
+      {/* Analysis Display Area */}
+      {(isAnalyzing || analysisResult || analysisError) && (
+        <div className="border-t pt-4 mt-4">
+          <h3 className="text-lg font-semibold mb-2">Quarterly Review Analysis</h3>
+          {isAnalyzing && <p className="text-muted-foreground animate-pulse">Analyzing review...</p>}
+          {analysisError && <p className="text-red-600">Error: {analysisError}</p>}
+          {analysisResult && (
+            <ScrollArea className="h-[150px] w-full rounded-md border p-3 bg-muted/50">
+              <pre className="whitespace-pre-wrap text-sm">{analysisResult}</pre>
+            </ScrollArea>
+          )}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex items-center space-x-2 pt-2 border-t">
         <Input
           value={input}
@@ -71,6 +113,16 @@ export function AIChatInterface() {
         />
         <Button type="submit" disabled={isLoading || !input.trim()} size="icon" aria-label="Send message">
           <Send className="h-4 w-4" />
+        </Button>
+        <Button
+          type="button" // Important: prevent form submission
+          variant="outline"
+          onClick={handleAnalyzeReview}
+          disabled={isLoading || isAnalyzing}
+          size="icon"
+          aria-label="Analyze latest review"
+        >
+          <FileText className="h-4 w-4" />
         </Button>
       </form>
     </div>
