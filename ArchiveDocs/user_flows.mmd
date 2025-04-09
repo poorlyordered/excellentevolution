@@ -8,11 +8,14 @@ flowchart TD
     Dashboard --> ViewProgress[View Progress]
     Dashboard --> UpdateGoals[Update Goals]
     
-    AssessmentFlow --> MBTI[MBTI Assessment]
-    AssessmentFlow --> Enneagram[Enneagram Assessment]
-    AssessmentFlow --> StrengthsFinder[StrengthsFinder]
+    AssessmentFlow --> BigFive[Big Five (OCEAN)]
+    AssessmentFlow --> SixteenPF[16PF (Optional)]
+    AssessmentFlow --> HollandCode[Holland Code (RIASEC)]
+    AssessmentFlow --> DiSC[DiSC]
+    AssessmentFlow --> TalentSmartEQ[TalentSmartEQ EI Appraisal]
+    AssessmentFlow --> CareerValues[Career Values Scale]
     
-    MBTI & Enneagram & StrengthsFinder --> Analysis[AI Analysis]
+    BigFive & SixteenPF & HollandCode & DiSC & TalentSmartEQ & CareerValues --> Analysis[AI Analysis]
     Analysis --> Insights[Personalized Insights]
     
     Insights --> DevelopmentPlan[Development Plan Generation]
@@ -24,11 +27,8 @@ flowchart TD
     
     Recommendations --> UpdateGoals
     
-    subgraph "Coaching Interaction"
-        UpdateGoals --> CoachingSession[Schedule Coaching]
-        CoachingSession --> SessionFeedback[Session Feedback]
-        SessionFeedback --> UpdatePlan[Update Development Plan]
-    end
+    Recommendations --> AICoachChat[Interact with AI Coach]
+    AICoachChat --> UpdateGoals
     
     style Start fill:#f9f,stroke:#333
     style Dashboard fill:#bbf,stroke:#333

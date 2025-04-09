@@ -7,9 +7,12 @@ graph TD
     
     subgraph "Assessment Layer"
         Assessments[(Assessments Table)]
-        MBTI_Data[(MBTI Results)]
-        Enneagram_Data[(Enneagram Results)]
-        Strength_Data[(StrengthsFinder Results)]
+        BigFive_Data[(Big Five Results)]
+        SixteenPF_Data[(16PF Results)]
+        HollandCode_Data[(Holland Code Results)]
+        DiSC_Data[(DiSC Results)]
+        TalentSmartEQ_Data[(TalentSmartEQ EI Results)]
+        CareerValues_Data[(Career Values Results)]
     end
     
     subgraph "Development Layer"
@@ -26,9 +29,7 @@ graph TD
     end
     
     subgraph "Coaching Layer"
-        Sessions[(Coaching Sessions)]
-        Resources[(Coaching Resources)]
-        Feedback[(Session Feedback)]
+        AICoach[(AI Coach)]
     end
     
     %% Data Flow Relationships
@@ -36,9 +37,12 @@ graph TD
     Users --> Auth
     Users --> Assessments
     
-    Assessments --> MBTI_Data
-    Assessments --> Enneagram_Data
-    Assessments --> Strength_Data
+    Assessments --> BigFive_Data
+    Assessments --> SixteenPF_Data
+    Assessments --> HollandCode_Data
+    Assessments --> DiSC_Data
+    Assessments --> TalentSmartEQ_Data
+    Assessments --> CareerValues_Data
     
     MBTI_Data & Enneagram_Data & Strength_Data --> AI_Analysis
     AI_Analysis --> Insights
@@ -49,9 +53,7 @@ graph TD
     Progress --> Reviews
     Reviews --> Recommendations
     
-    Users --> Sessions
-    Sessions --> Feedback
-    Sessions --> Resources
+    Users --> AICoach
     
     Recommendations --> Plans
     

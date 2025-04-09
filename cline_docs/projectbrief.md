@@ -1,7 +1,7 @@
 # Project Brief: Excellent Evolution
 
 ## Overview
-Excellent Evolution is a self-serve, AI-powered professional development platform designed to deliver personalized career growth through scientifically validated assessments, intelligent recommendations, and self-driven progress tracking.
+Excellent Evolution is a self-serve, AI-powered professional development platform designed to deliver personalized career growth through scientifically validated assessments, intelligent recommendations, and self-driven progress tracking. The user's journey is framed by the [Story Circle methodology](../ArchiveDocs/StoryCircle.md) to provide a narrative structure for development.
 
 ## Core Requirements
 - Provide a suite of assessments: Big Five (OCEAN), 16PF (optional), Holland Code (RIASEC), DiSC, TalentSmartEQ EI Appraisal, and Career Values Scale.

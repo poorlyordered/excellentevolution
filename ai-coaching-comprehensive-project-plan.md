@@ -3,7 +3,7 @@
 ## I. Project Overview
 
 ### Vision
-AI-powered coaching platform for comprehensive professional development through personalized career roadmaps and intelligent coaching insights (aligned with productContext.md)
+AI-powered coaching platform for comprehensive professional development through personalized career roadmaps and intelligent coaching insights (aligned with productContext.md). The user's journey is conceptually guided by the [Story Circle framework](./ArchiveDocs/StoryCircle.md).
 
 ## II. Technical Architecture
 

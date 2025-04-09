@@ -82,7 +82,7 @@ To empower professionals, career changers, leadership aspirants, personal develo
 - **Skill Development Roadmap:** Step-by-step plan integrating assessment insights.
 
 #### 4. Coaching Integration
-- **Session Scheduling:** Calendar sync for booking coach sessions.
+- **Session Scheduling:** Calendar sync reminders.
 - **Progress Documentation:** Notes and updates shared between coach and client.
 - **Resource Library:** Curated articles, videos, and exercises based on assessments.
 - **Coach-Client Communication:** In-app messaging with notification support.
@@ -117,7 +117,7 @@ To empower professionals, career changers, leadership aspirants, personal develo
 #### 4. Technical Architecture
 - **Frontend:** Next.js 15 (App Router) with React 19 and TypeScript.
 - **Backend:** Next.js API routes for server-side logic.
-- **Database:** PostgreSQL for relational data with JSON support.
+- **Database:** MariaDB for relational data with JSON support.
 - **AI/ML:** Vercel AI SDK with Sonnet 3.7 LLM.
 - **Cloud/Deployment:** Vercel for hosting and scaling.
 - **APIs:** RESTful for integrations (e.g., Google Calendar, Resend).
