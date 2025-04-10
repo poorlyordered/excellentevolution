@@ -5,7 +5,7 @@ import { streamText, CoreMessage } from 'ai'; // Import CoreMessage
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { prisma } from '@/lib/prisma';
-import { AssessmentType, Prisma } from '@prisma/client'; // Import necessary types
+import { Prisma, AssessmentType } from '@prisma/client'; // Import Prisma namespace and AssessmentType enum
 
 // Initialize the Anthropic provider instance
 const anthropic = createAnthropic({
@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       });
       if (assessments.length > 0) {
         userContext += "\n## Assessment Insights:\n";
-        assessments.forEach((assessment: { type: AssessmentType; processedInsights: Prisma.JsonValue | null }) => { // Use imported types
+        assessments.forEach((assessment: { type: AssessmentType; processedInsights: Prisma.JsonValue | null }) => { // Use imported AssessmentType and namespaced Prisma.JsonValue
           // Safely access processedInsights, assuming it's JSON or stringifiable
           let insights = "No insights processed.";
           if (assessment.processedInsights) {
