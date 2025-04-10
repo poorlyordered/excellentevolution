@@ -46,6 +46,10 @@
   - Implemented global setup (`global.setup.ts`) for reusable authentication state (requires env vars).
   - Created initial test file (`auth.spec.ts`) verifying authenticated access.
   - Further Playwright test implementation is currently paused.
+  - Troubleshooted persistent Prisma generate errors (P1012) and related TypeScript errors in `/api/ai/chat`.
+  - Simplified Prisma generator output path in `prisma/schema.prisma`.
+  - Resolved TypeScript errors in `/api/ai/chat` by restarting the TS server, indicating a tooling cache issue.
+  - Committed fixes and outstanding changes to the repository.
 ## Next Steps
 - Connect to calendar check-in feature (Postponed)
 - Implement remaining Playwright integration tests (Paused)
