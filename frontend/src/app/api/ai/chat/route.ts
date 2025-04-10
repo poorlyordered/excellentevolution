@@ -1,17 +1,12 @@
 // frontend/src/app/api/ai/chat/route.ts
-import { Anthropic } from '@anthropic-ai/sdk';
-import { createAnthropic } from '@ai-sdk/anthropic';
+import { xai } from '@ai-sdk/xai';
 import { streamText, CoreMessage } from 'ai'; // Import CoreMessage
 import { NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { prisma } from '@/lib/prisma';
-import { Prisma, AssessmentType } from '@prisma/client'; // Import Prisma namespace and AssessmentType enum
+ // AssessmentType import removed; use string for type
 
-// Initialize the Anthropic provider instance
-const anthropic = createAnthropic({
-  // apiKey is read automatically from ANTHROPIC_API_KEY env var by default
-  // apiKey: process.env.ANTHROPIC_API_KEY, // Optional: Explicitly pass if needed
-});
+// No explicit initialization needed for xai (Grok 3 Mini Beta)
 
 // IMPORTANT: Set the runtime to edge
 export const runtime = 'edge';
@@ -53,7 +48,7 @@ export async function POST(req: Request) {
       });
       if (assessments.length > 0) {
         userContext += "\n## Assessment Insights:\n";
-        assessments.forEach((assessment: { type: AssessmentType; processedInsights: Prisma.JsonValue | null }) => { // Use imported AssessmentType and namespaced Prisma.JsonValue
+        assessments.forEach((assessment: { type: string; processedInsights: unknown | null }) => { // Use string for type and unknown for JSON
           // Safely access processedInsights, assuming it's JSON or stringifiable
           let insights = "No insights processed.";
           if (assessment.processedInsights) {
@@ -81,7 +76,7 @@ export async function POST(req: Request) {
 
     // --- 5. Call AI ---
     const result = await streamText({
-      model: anthropic('claude-3-5-sonnet-20240620'), // Updated model
+      model: xai('x-ai/grok-3-mini-beta'), // Switched to Grok 3 Mini Beta via Vercel AI SDK
       system: finalSystemPrompt, // Pass augmented system prompt
       messages: messages,
       maxTokens: 1024,
@@ -92,11 +87,7 @@ export async function POST(req: Request) {
 
   } catch (error: unknown) { // Explicitly type error as unknown
     console.error("Error in AI chat route:", error);
-    // Handle specific Anthropic API errors
-    if (error instanceof Anthropic.APIError) {
-      console.error(`Anthropic API Error: ${error.status} ${error.name}`, error);
-      return NextResponse.json({ error: `AI Service Error: ${error.message}` }, { status: error.status });
-    }
+    // Handle specific API errors (Grok 3 Mini Beta does not use Anthropic APIError)
     // Handle generic errors
     if (error instanceof Error) {
         console.error("Generic Error:", error);

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^1.2.6",
+    "@ai-sdk/xai": "^1.2.10",
     "@anthropic-ai/sdk": "^0.39.0",
     "@clerk/nextjs": "^6.10.6",
     "@hookform/resolvers": "^5.0.1",

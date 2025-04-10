@@ -1,5 +1,5 @@
 // frontend/src/app/api/ai/refine-plan/route.ts
-import { createAnthropic } from '@ai-sdk/anthropic';
+import { xai } from '@ai-sdk/xai';
 import { streamText } from 'ai';
 import { z } from 'zod';
 
@@ -11,8 +11,8 @@ const RefineRequestSchema = z.object({
   planContent: z.string().min(10, 'Plan content must be at least 10 characters long.'),
 });
 
-// Initialize the Anthropic provider (ensure ANTHROPIC_API_KEY is set in .env)
-const anthropic = createAnthropic();
+// Initialize the Grok 3 Mini Beta provider via Vercel AI SDK
+// No explicit initialization needed for xai
 
 export async function POST(req: Request) {
   try {
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     const systemPrompt = `You are an expert career development coach AI. Your task is to refine the following professional development plan provided by the user. Focus on clarity, actionability, and alignment with best practices. Improve the structure, wording, and suggest concrete, measurable steps where appropriate. Do not add conversational filler; return only the refined Markdown plan.`;
 
     const result = await streamText({
-      model: anthropic('claude-3-5-sonnet-20240620'), // Use the specified model
+      model: xai('x-ai/grok-3-mini-beta'), // Switched to Grok 3 Mini Beta via Vercel AI SDK
       system: systemPrompt,
       prompt: `Refine this development plan:\n\n---\n\n${planContent}`,
       // Optional: Add temperature, max_tokens etc. if needed
