@@ -10,7 +10,7 @@ Professionals often lack accessible, self-directed tools to guide their career g
 
 ## How It Works
 - Users complete a guided assessment flow (Big Five → optional 16PF → Holland Code → DiSC → TalentSmartEQ EI → Career Values Scale), entering scores from external sites.
-- AI (Sonnet 3.7) generates personalized recommendations, visualized in standard or gamified views (e.g., levels, badges).
+- AI (Grok 3 Mini Beta via Vercel AI SDK) generates personalized recommendations, visualized in standard or gamified views (e.g., levels, badges).
 - Calendar integration schedules check-ins for goal updates and reflection.
 - Progress is tracked quarterly, with exportable summaries.
 
@@ -18,4 +18,5 @@ Professionals often lack accessible, self-directed tools to guide their career g
 - Sleek, self-guided interface with mobile responsiveness (Next.js 15, Shadcn UI, Radix UI, Tailwind CSS).
 - Intuitive flow with optional gamification (e.g., progress bars, achievements).
 - Accessible design (WCAG 2.1) with clear calendar prompts.
+- User avatar/profile management via Clerk UserButton.
 - Transparent affiliate links for assessments and future courses (e.g., Udemy).

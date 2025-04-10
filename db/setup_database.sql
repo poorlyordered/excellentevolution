@@ -1,18 +1,53 @@
--- MariaDB Database Setup Script
+-- Excellent Evolution MariaDB Schema
 
--- Create database if not exists
-CREATE DATABASE IF NOT EXISTS professional_coaching_db;
+CREATE TABLE User (
+  id CHAR(36) PRIMARY KEY,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  name VARCHAR(100),
+  role ENUM('CLIENT', 'COACH', 'ADMIN') DEFAULT 'CLIENT',
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_login DATETIME,
+  is_active BOOLEAN DEFAULT TRUE
+);
 
--- Use the database
-USE professional_coaching_db;
+CREATE TABLE Assessment (
+  id CHAR(36) PRIMARY KEY,
+  user_id CHAR(36) NOT NULL,
+  type ENUM('BIG_FIVE', 'SIXTEEN_PF', 'HOLLAND_CODE', 'DISC', 'TALENTSMART_EQ', 'CAREER_VALUES') NOT NULL,
+  raw_results JSON,
+  processed_insights JSON,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_assessment_user FOREIGN KEY (user_id) REFERENCES User(id)
+);
 
--- Create application user with limited privileges
-CREATE USER IF NOT EXISTS 'coaching_app_user'@'localhost' IDENTIFIED BY 'Tray4-Unraveled2-Snaking1-Jogging1';
+CREATE TABLE DevelopmentPlan (
+  id CHAR(36) PRIMARY KEY,
+  user_id CHAR(36) NOT NULL,
+  title VARCHAR(255),
+  content TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_plan_user FOREIGN KEY (user_id) REFERENCES User(id)
+);
 
--- Grant necessary privileges
-GRANT SELECT, INSERT, UPDATE, DELETE 
-ON professional_coaching_db.* 
-TO 'coaching_app_user'@'localhost';
+CREATE TABLE QuarterlyReview (
+  id CHAR(36) PRIMARY KEY,
+  user_id CHAR(36) NOT NULL,
+  review_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  content TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES User(id)
+);
 
--- Flush privileges to ensure changes take effect
-FLUSH PRIVILEGES;
+-- Indexes
+CREATE INDEX idx_user_email ON User(email);
+CREATE INDEX idx_assessment_user_id ON Assessment(user_id);
+CREATE INDEX idx_plan_user_id ON DevelopmentPlan(user_id);
+CREATE INDEX idx_review_user_id ON QuarterlyReview(user_id);
+
+-- Table mappings (for Prisma compatibility, not required for MariaDB)
+-- User: users
+-- Assessment: assessments
+-- DevelopmentPlan: development_plans
+-- QuarterlyReview: quarterly_reviews

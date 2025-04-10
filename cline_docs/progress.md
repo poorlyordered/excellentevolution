@@ -6,14 +6,15 @@
   - Interactive viewer/editor
   - Assessment data integration
   - Save/Update/Export functionality (via Server Actions & Prisma)
-  - AI Refinement via API route and Vercel AI SDK
+  - AI Refinement via API route and Vercel AI SDK (now using Grok 3 Mini Beta)
 - Assessment suite locked: Big Five, 16PF (optional), Holland Code, DiSC, TalentSmartEQ EI, Career Values Scale
 - Self-serve flow with calendar check-ins conceptualized
 - Tech stack updated to TypeScript, React 19, Next.js 15, Vercel AI SDK, etc.
 - Direct database access via Prisma Client in Next.js backend
+- **Backend database migrated from MariaDB to PostgreSQL 17 (schema, environment, and Prisma config updated)**
 - AI Coaching Assistant chat interface:
   - Basic implementation (API, hook, UI, page)
-  - User context integration (plan summary, assessment insights) in API (TypeScript/Prisma type issues resolved - tooling cache related)
+  - User context integration (plan summary, assessment insights) in API
   - Specific flow: "Analyze Latest Review" (via Server Action)
 - Quarterly Review System:
   - Input form (`ReviewInputForm`) added to dashboard.
@@ -23,30 +24,37 @@
   - Configuration set up.
   - Global setup for authentication implemented (requires env vars).
   - Initial auth test created.
+- Landing page hero section redesigned:
+  - New headline and larger, centered AI-powered subtitle
+  - Combined supporting text into a single paragraph
+- Dashboard improvements:
+  - Personalized welcome message ("Welcome {user.firstName}")
+  - Clerk UserButton avatar/profile management
+
 ## What's Left to Build
 - Calendar check-in integration with Next.js API Routes (Postponed)
 - Implement Playwright integration tests based on `testing/playwright-plan.md` (Paused)
 - Further UI prototyping and refinement for integrated features
+- Subscription management integration (future)
+
 ## Current Status
-- Core development planning features implemented (save/export, AI refinement).
-- AI chat interface enhanced with user context and "Analyze Review" flow (TS/Prisma tooling issues resolved).
-- Quarterly Review input and analysis integrated.
-- Database access pattern updated (direct Prisma).
-- Playwright testing foundation established.
-- Codebase cleaned and all changes committed to repository.
-- Next milestones:
-  - Calendar integration (Postponed).
-  - Implement Playwright integration tests (Paused).
-  - User testing for implemented features.
-  - Await further direction.
+- All AI features migrated to Grok 3 Mini Beta via Vercel AI SDK
+- UI/UX improvements deployed (landing page, dashboard)
+- **Backend database successfully migrated to PostgreSQL 17**
+- Memory Bank documentation updated
+- Awaiting further direction for new features or enhancements
+
 ## Known Issues
-- AI Coaching Assistant could benefit from more guided coaching flows.
-- Calendar feature usability untested (Feature postponed).
-- Playwright tests need implementation and execution with credentials.
-- Resolved previous TypeScript/Prisma generation errors (appeared to be tooling/cache related, fixed by TS server restart).
+- AI Coaching Assistant could benefit from more guided coaching flows
+- Calendar feature usability untested (Feature postponed)
+- Playwright tests need implementation and execution with credentials
+
 ## Evolution of Project Decisions
+- Migrated all AI features to Grok 3 Mini Beta via Vercel AI SDK
+- Added Clerk UserButton for avatar and profile management
 - Added professional development planning as core feature
 - Using editable Markdown for flexibility
 - Separated data processing from presentation
-- Selected Playwright for integration testing framework (setup complete, implementation paused).
-- Changed database access from dedicated MCP server to direct Prisma Client usage in Next.js backend.
+- Selected Playwright for integration testing framework (setup complete, implementation paused)
+- Changed database access from dedicated MCP server to direct Prisma Client usage in Next.js backend
+- **Switched backend database from MariaDB to PostgreSQL 17 for improved compatibility and future scalability**
