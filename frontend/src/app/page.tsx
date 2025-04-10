@@ -132,9 +132,15 @@ export default function NextFullStepLandingPage() {
         {/* Hero Section */}
         <section className="py-20 md:py-32 bg-gradient-to-r from-teal-50 via-white to-purple-50">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 text-purple-900 leading-tight">
-              <span className="text-teal-600">Self-directed tools</span> for exceptional professional evolution.
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-2 text-purple-900 leading-tight">
+              Unlock your Next Full Step
             </h1>
+            <h3 className="text-base md:text-lg text-teal-700 mb-2 max-w-xl mx-auto text-center font-semibold">
+              powered by AI, driven by you
+            </h3>
+            <p className="text-base md:text-lg text-gray-700 mb-4 max-w-2xl mx-auto">
+              Self-directed tools for exceptional professional evolution.
+            </p>
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
               Take control of your career path with personalized insights, structured planning, and engaging progress tracking powered by Next Full Step.
             </p>
@@ -142,9 +148,17 @@ export default function NextFullStepLandingPage() {
               <Progress value={33} className="w-1/4 h-3 bg-purple-200 [&>div]:bg-gradient-to-r [&>div]:from-orange-400 [&>div]:to-yellow-400" />
               <span className="text-sm font-medium text-purple-700">Your Journey Begins...</span>
             </div>
-            <Button size="lg" className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
-              Start Your Journey <Rocket className="ml-2 h-5 w-5" />
-            </Button>
+            <Link href="/sign-in" passHref legacyBehavior>
+              <Button
+                size="lg"
+                className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+                asChild
+              >
+                <a>
+                  Sign Up / Log In <Rocket className="ml-2 h-5 w-5" />
+                </a>
+              </Button>
+            </Link>
           </div>
         </section>
 
