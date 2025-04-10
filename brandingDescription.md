@@ -1,0 +1,4 @@
+Next Full Step will be the application name and branding we will be using for this project.
+Below is a brand description
+
+conveys a sense of progression and completeness in one's career journey. The word "Next" implies looking ahead, suggesting a forward-thinking approach to career development. "Full" indicates a comprehensive or holistic method, aligning with the idea of career coaching that takes into account personality, training, and education. "Step" signifies action and movement, reinforcing the concept of taking tangible strides toward one's career goals. Together, the name encapsulates the essence of guiding individuals on their unique career paths, helping them navigate their futures with confidence and clarity.

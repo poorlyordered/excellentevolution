@@ -9,7 +9,7 @@
 - **Hosting:** Vercel for deployment and scaling.
 - **Database:**
   - MariaDB 10.11 for local development
-  - MCP Server for secure database interactions
+  - Direct Prisma Client usage in Next.js backend
   - Prisma ORM for type-safe queries
 
 ## Development Setup
@@ -36,7 +36,4 @@
 - Vercel AI SDK (`streamText` with `createAnthropic` provider) for AI chat interactions via API routes
 - Vercel AI SDK (`useChat` hook) for managing chat state in the frontend
 - Tailwind CSS for rapid, responsive styling with Shadcn UI
-- MCP tools for secure database operations:
-  - execute_query: Parameterized SQL execution
-  - get_tables: Schema inspection
-  - get_table_columns: Table structure analysis
+- **Testing:** Playwright for integration and end-to-end testing.

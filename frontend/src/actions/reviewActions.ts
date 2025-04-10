@@ -7,7 +7,7 @@ import { createAnthropic } from '@ai-sdk/anthropic';
 import { streamText } from 'ai';
 import { z } from 'zod'; // Import Zod
 import { revalidatePath } from 'next/cache'; // Import revalidatePath
-// Removed problematic Prisma imports
+import type { JsonValue } from '@prisma/client/runtime/library'; // Import JsonValue type
 
 // Initialize Anthropic provider
 const anthropic = createAnthropic();
@@ -66,7 +66,7 @@ export async function analyzeLatestReview() {
       assessmentContext = "Assessment Insights:\n";
       // Define local type as workaround for persistent import issues
       // Workaround type due to persistent Prisma type import issues
-      type AssessmentContext = { type: string; processedInsights: any | null };
+      type AssessmentContext = { type: string; processedInsights: JsonValue | null }; // Use imported JsonValue
       assessments.forEach((assessment: AssessmentContext) => { // Use local type
         let insights = "No insights processed.";
         if (assessment.processedInsights) {

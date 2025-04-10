@@ -5,31 +5,46 @@
   - Markdown template engine
   - Interactive viewer/editor
   - Assessment data integration
+  - Save/Update/Export functionality (via Server Actions & Prisma)
+  - AI Refinement via API route and Vercel AI SDK
 - Assessment suite locked: Big Five, 16PF (optional), Holland Code, DiSC, TalentSmartEQ EI, Career Values Scale
 - Self-serve flow with calendar check-ins conceptualized
 - Tech stack updated to TypeScript, React 19, Next.js 15, Vercel AI SDK, etc.
-- Secure database access via MCP server
-- Basic AI Coaching Assistant chat interface implemented (API, hook, UI, page)
+- Direct database access via Prisma Client in Next.js backend
+- AI Coaching Assistant chat interface:
+  - Basic implementation (API, hook, UI, page)
+  - User context integration (plan summary, assessment insights) in API
+  - Specific flow: "Analyze Latest Review" (via Server Action)
+- Quarterly Review System:
+  - Input form (`ReviewInputForm`) added to dashboard.
+  - Server action (`createOrUpdateQuarterlyReview`) for saving reviews.
+  - Analysis flow uses saved review data.
+- Playwright testing foundation:
+  - Configuration set up.
+  - Global setup for authentication implemented (requires env vars).
+  - Initial auth test created.
 ## What's Left to Build
-- AI Coaching Assistant enhancements (context integration, specific flows)
-- AI refinement for development plans (Vercel AI SDK integration)
-- Save/export functionality for development plans
-- Calendar check-in integration with Next.js API Routes
-- Further UI prototyping and refinement
+- Calendar check-in integration with Next.js API Routes (Postponed)
+- Implement Playwright integration tests based on `testing/playwright-plan.md` (Paused)
+- Further UI prototyping and refinement for integrated features
 ## Current Status
-- Core development planning features implemented
-- Basic AI chat interface implemented and ready for testing/enhancement
+- Core development planning features implemented (save/export, AI refinement).
+- AI chat interface enhanced with user context and "Analyze Review" flow.
+- Quarterly Review input and analysis integrated.
+- Database access pattern updated (direct Prisma).
+- Playwright testing foundation established.
 - Next milestones:
-  - Enhance AI Coaching Assistant (context, flows)
-  - Implement AI refinement for Development Plans
-  - User testing for development plan and AI chat flows
-  - Calendar integration
+  - Calendar integration (Postponed).
+  - Implement Playwright integration tests (Paused).
+  - User testing for implemented features.
+  - Await further direction.
 ## Known Issues
-- AI Coaching Assistant currently basic (no context integration, limited flows)
-- AI refinement for development plans not yet implemented
-- Export functionality pending
-- Calendar feature usability untested
+- AI Coaching Assistant could benefit from more guided coaching flows.
+- Calendar feature usability untested (Feature postponed).
+- Playwright tests need implementation and execution with credentials.
 ## Evolution of Project Decisions
 - Added professional development planning as core feature
 - Using editable Markdown for flexibility
 - Separated data processing from presentation
+- Selected Playwright for integration testing framework (setup complete, implementation paused).
+- Changed database access from dedicated MCP server to direct Prisma Client usage in Next.js backend.
