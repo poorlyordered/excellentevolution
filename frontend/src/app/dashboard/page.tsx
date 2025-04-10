@@ -1,6 +1,6 @@
 'use client'
 
-import { useUser, SignOutButton } from "@clerk/nextjs";
+import { useUser, SignOutButton, UserButton } from "@clerk/nextjs";
 import { ReviewInputForm } from "@/components/reviews/ReviewInputForm"; // Import the form
 
 export default function DashboardPage() {
@@ -10,9 +10,12 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="mx-auto max-w-7xl">
         <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Welcome, {user?.firstName || 'User'}!</h1>
-            <p className="text-gray-600 mt-2">Track your professional development journey</p>
+          <div className="flex items-center gap-4">
+            <UserButton afterSignOutUrl="/" />
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900">Welcome {user?.firstName ? user.firstName : ''}</h1>
+              <p className="text-gray-600 mt-2">Track your professional development journey</p>
+            </div>
           </div>
           <SignOutButton>
             <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500">
