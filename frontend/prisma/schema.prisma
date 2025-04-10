@@ -5,14 +5,16 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String      @id @default(uuid()) @db.Char(36)
-  email     String      @unique @db.VarChar(255)
-  name      String?     @db.VarChar(100)
+  id        String      @id @default(uuid()) @db.Uuid
+  email     String      @unique
+  name      String?
+  hashedPassword String?
+  avatarUrl String?
   role      UserRole    @default(CLIENT)
   createdAt DateTime    @default(now()) @map("created_at")
   lastLogin DateTime?   @map("last_login")
@@ -24,11 +26,11 @@ model User {
 }
 
 model Assessment {
-  id                String      @id @default(uuid()) @db.Char(36)
-  userId           String      @map("user_id") @db.Char(36)
+  id                String      @id @default(uuid())
+  userId           String      @map("user_id")
   type             AssessmentType
   rawResults       Json        @map("raw_results")
-  processedInsights String[]   @map("processed_insights")
+  processedInsights Json   @map("processed_insights")
   createdAt        DateTime    @default(now()) @map("created_at")
   user             User        @relation(fields: [userId], references: [id])
 

@@ -2,7 +2,6 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 import LayoutContent from './LayoutContent'
-import { ClerkProvider } from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClerkProvider>
-          <LayoutContent>{children}</LayoutContent>
-        </ClerkProvider>
+        <LayoutContent>{children}</LayoutContent>
       </body>
     </html>
   )

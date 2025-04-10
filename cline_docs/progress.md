@@ -29,7 +29,8 @@
   - Combined supporting text into a single paragraph
 - Dashboard improvements:
   - Personalized welcome message ("Welcome {user.firstName}")
-  - Clerk UserButton avatar/profile management
+  - NextAuth.js authentication (credentials provider, Prisma adapter)
+  - Custom registration and login flows (API route, password hashing)
 
 ## What's Left to Build
 - Calendar check-in integration with Next.js API Routes (Postponed)
@@ -51,7 +52,7 @@
 
 ## Evolution of Project Decisions
 - Migrated all AI features to Grok 3 Mini Beta via Vercel AI SDK
-- Added Clerk UserButton for avatar and profile management
+- Migrated authentication from Clerk to NextAuth.js (custom registration/login, credentials provider, Prisma adapter)
 - Added professional development planning as core feature
 - Using editable Markdown for flexibility
 - Separated data processing from presentation

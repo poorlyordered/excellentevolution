@@ -64,6 +64,9 @@ yarn-error.log*
 *.sublime-project
 
 # System
+
+# User-uploaded avatars
+public/avatars/
 .DS_Store
 Thumbs.db
 

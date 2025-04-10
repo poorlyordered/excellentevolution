@@ -1,27 +1,29 @@
 'use client'
 
-import { useUser, SignOutButton, UserButton } from "@clerk/nextjs";
-import { ReviewInputForm } from "@/components/reviews/ReviewInputForm"; // Import the form
+/* TODO: Replace Clerk user/auth imports with NextAuth.js equivalents */
 
 export default function DashboardPage() {
-  const { user } = useUser();
+  // TODO: Replace Clerk useUser with NextAuth.js session
+  // TODO: Integrate NextAuth.js session for user info
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="mx-auto max-w-7xl">
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-4">
-            <UserButton afterSignOutUrl="/" />
+            {/* TODO: Replace UserButton with NextAuth.js user menu */}
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Welcome {user?.firstName ? user.firstName : ''}</h1>
+              <h1 className="text-3xl font-bold text-gray-900">
+                {/* TODO: Replace with NextAuth.js user greeting */}
+                Welcome
+              </h1>
               <p className="text-gray-600 mt-2">Track your professional development journey</p>
             </div>
           </div>
-          <SignOutButton>
-            <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500">
+          {/* TODO: Replace SignOutButton with NextAuth.js sign out */}
+          <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500" disabled>
               Sign Out
             </button>
-          </SignOutButton>
         </div>
         
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -93,10 +95,6 @@ export default function DashboardPage() {
             </a>
           </div>
 
-          {/* Quarterly Review Input Card */}
-          <div className="bg-white p-6 rounded-lg shadow md:col-span-2 lg:col-span-1"> {/* Adjust span as needed */}
-            <ReviewInputForm />
-          </div>
         </div>
 
         {/* Quick Actions */}

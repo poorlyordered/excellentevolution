@@ -73,13 +73,13 @@ export function ReviewInputForm({ onReviewSaved }: ReviewInputFormProps) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 border p-4 rounded-lg">
-      <h3 className="text-lg font-semibold">Add/Update Quarterly Review</h3>
+      <h3 className="text-lg font-semibold text-gray-900">Add/Update Quarterly Review</h3>
       <div className="space-y-2">
-        <Label htmlFor="reviewContent">Review Content</Label>
+        <Label htmlFor="reviewContent" className="text-gray-900">Review Content</Label>
         <Textarea
           id="reviewContent"
           placeholder="Enter the details of your quarterly review..."
-          className="min-h-[150px]"
+          className="min-h-[150px] text-gray-900 placeholder-gray-500"
           {...register('content')}
           disabled={isLoading}
         />

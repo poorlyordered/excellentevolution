@@ -4,7 +4,7 @@
 - **Frontend:** React 19, Next.js 15 (App Router), TypeScript.
 - **UI:** Shadcn UI, Radix UI, Tailwind CSS.
 - **AI:** Vercel AI SDK with Grok 3 Mini Beta LLM (`@ai-sdk/xai`).
-- **Auth:** Clerk.com for user authentication and profile management (UserButton).
+- **Auth:** NextAuth.js (credentials provider, Prisma adapter) for user authentication and profile management.
 - **Email:** Resend for transactional emails
 - **Hosting:** Vercel for deployment and scaling.
 - **Database:**
@@ -27,7 +27,7 @@
 - Libraries:
   - Vercel AI SDK (`ai`, `@ai-sdk/xai`)
   - Radix UI primitives (`@radix-ui/react-slot`, `@radix-ui/react-scroll-area`)
-  - Clerk React (UserButton), Resend SDK, Sonner (notifications), Lucide React (icons)
+  - NextAuth.js, Resend SDK, Sonner (notifications), Lucide React (icons)
   - PostgreSQL Node.js driver
   - Model Context Protocol SDK
 
@@ -35,6 +35,6 @@
 - TypeScript for strict typing in React 19 components
 - Vercel AI SDK (`streamText` with `xai` provider) for AI chat and plan refinement via API routes
 - Vercel AI SDK (`useChat` hook) for managing chat state in the frontend
-- Clerk UserButton for user profile/account management
+- NextAuth.js session for user profile/account management
 - Tailwind CSS for rapid, responsive styling with Shadcn UI
 - **Testing:** Playwright for integration and end-to-end testing.

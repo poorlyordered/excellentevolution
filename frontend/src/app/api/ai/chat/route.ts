@@ -2,7 +2,8 @@
 import { xai } from '@ai-sdk/xai';
 import { streamText, CoreMessage } from 'ai'; // Import CoreMessage
 import { NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth'; // TODO: Create this config for NextAuth.js
 import { prisma } from '@/lib/prisma';
  // AssessmentType import removed; use string for type
 
@@ -21,10 +22,11 @@ Keep responses concise and focused unless asked for detailed explanations.`;
 export async function POST(req: Request) {
   try {
     // --- 1. Authentication ---
-    const { userId } = await auth();
-    if (!userId) {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    const userId = session.user.id;
 
     // --- 2. Parse Request Body ---
     const { messages }: { messages: CoreMessage[] } = await req.json(); // Type messages

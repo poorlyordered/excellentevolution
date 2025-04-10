@@ -1,20 +1,21 @@
-# AI-Powered Professional Development Coaching Application
-
+# AI-Powered Professional Development Platform – Comprehensive Project Plan
 
 ## I. Project Overview
 
 ### Vision
-AI-powered coaching platform for comprehensive professional development through personalized career roadmaps and intelligent coaching insights (aligned with productContext.md)
+A self-serve, AI-powered professional development platform that empowers users to drive their own career growth through validated assessments, intelligent recommendations, and gamified progress tracking—without reliance on human coaches.
 
 ## II. Technical Architecture
 
 ### Technology Stack
-- **Frontend**: Next.js 14 (App Router)
-- **Language**: TypeScript 5.3
-- **State Management**: Zustand + React-Query
-- **Authentication**: NextAuth.js (Magic Link)
-- **AI Integration**: Claude API + OpenAI GPT-4 Turbo
-- **Database**: MariaDB 11.3 (Cloud Instance)
+- **Frontend**: Next.js 15 (App Router), React 19, TypeScript
+- **State Management**: Zustand
+- **Authentication**: Clerk.com (UserButton for profile/account management)
+- **AI Integration**: Vercel AI SDK with Grok 3 Mini Beta LLM (`@ai-sdk/xai`)
+- **Database**: PostgreSQL 17 (local and production) via Prisma ORM
+- **Styling/UI**: Tailwind CSS, Shadcn UI, Radix UI
+- **Email**: Resend (transactional emails)
+- **Hosting**: Vercel
 
 ### Project Structure
 ```
@@ -24,14 +25,14 @@ coaching-app/
 │   ├── app/
 │   │   ├── (auth)/
 │   │   ├── (dashboard)/
-│   │   ├── (coaching)/
+│   │   ├── (growth-center)/  # Formerly (coaching)
 │   │   └── layout.tsx
 │   │
 │   ├── components/
 │   │   ├── ui/
 │   │   ├── development-plan/
 │   │   ├── assessments/
-│   │   └── coaching/
+│   │   └── reviews/
 │   │
 │   ├── lib/
 │   │   ├── database/
@@ -42,12 +43,12 @@ coaching-app/
 │   ├── hooks/
 │   │   ├── useDevPlan.ts
 │   │   ├── useAssessments.ts
-│   │   └── useCoaching.ts
+│   │   └── useAIRecommendations.ts
 │   │
 │   └── types/
 │       ├── development-plan.ts
 │       ├── assessments.ts
-│       └── coaching.ts
+│       └── reviews.ts
 │
 └── .env.local
 ```
@@ -55,227 +56,186 @@ coaching-app/
 ## III. Core Features and Modules
 
 ### 1. User Authentication and Onboarding
-- NextAuth.js with Magic Link authentication
-- Comprehensive user profile creation
-- Initial assessment workflow
-- Session-based middleware implementation
+- Clerk.com authentication (UserButton for profile/account management)
+- User profile creation and avatar management
+- Guided onboarding with initial assessment workflow
 
-#### Onboarding Assessment Components
-- Personality Type Assessments
-  - Enneagram
-  - Myers-Briggs (MBTI)
-  - StrengthsFinder
-- Professional Context Capture
-- Career Aspiration Mapping
+### 2. Assessment Hub
+- Big Five (OCEAN), Holland Code (RIASEC), DiSC, TalentSmartEQ EI, Career Values Scale, optional 16PF
+- Users enter scores from external validated assessment sites (with affiliate links)
+- Assessment data integrated into user profile
 
-### 2. Professional Development Plan Generator
-#### Key Capabilities
-- Dynamic Markdown document generation (context-aware templates)
-- AI-assisted goal refinement with personality integration
-- Quarterly review system with progress tracking
-- Adaptive skill development roadmap
+### 3. AI-Powered Development Plan Generator
+- Dynamic Markdown plan generation (context-aware templates)
+- AI-assisted goal refinement and recommendations (Grok 3 Mini Beta via Vercel AI SDK)
+- Editable, exportable plans
+- Gamified progress tracking and analytics
 
-#### Core Functionality
-- Automatic template population
-- AI-powered goal refinement
-- Progress tracking
-- Adaptive recommendations
+### 4. Growth Center (Self-Serve)
+- No human coaches; all features are self-serve and AI-driven
+- Quarterly review system with progress tracking and reflection
+- Self-serve resources: assessment hub, goal-setting templates, development exercises
+- AI chat assistant for contextual career advice and plan refinement
 
-### 3. AI Coaching Assistant
-- Natural language interactions
-- Contextual career advice
-- Personalized development strategies
-- Quarterly review analysis
+### 5. Dashboard and Visualizations
+- Personalized welcome and progress overview
+- Assessment status, development plan progress, and quick actions
+- Gamified achievements and analytics
 
-## IV. Database Schema (MariaDB)
+## IV. Database Schema (PostgreSQL/Prisma)
 
-```sql
--- Users Table
-CREATE TABLE users (
-  id CHAR(36) PRIMARY KEY DEFAULT UUID(),
-  email VARCHAR(255) UNIQUE NOT NULL,
-  email_verified DATETIME(6),
-  verification_token VARCHAR(255),
-  full_name VARCHAR(255),
-  profile_data JSON,
-  assessment_results JSON,
-  created_at DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6),
-  last_coached_at DATETIME(6),
-  personality_type VARCHAR(4),
-  INDEX idx_personality_type (personality_type)
-);
+```prisma
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  role      UserRole @default(CLIENT)
+  createdAt DateTime @default(now())
+  lastLogin DateTime?
+  isActive  Boolean  @default(true)
+  assessments Assessment[]
+  developmentPlans DevelopmentPlan[]
+  quarterlyReviews QuarterlyReview[]
+}
 
--- Development Plans Table
-CREATE TABLE development_plans (
-  id CHAR(36) PRIMARY KEY DEFAULT UUID(),
-  user_id CHAR(36) NOT NULL,
-  plan_version VARCHAR(20) NOT NULL,
-  career_stage ENUM('early', 'mid', 'executive') NOT NULL,
-  personality_type VARCHAR(4) NOT NULL,
-  short_term_goals JSON,
-  long_term_objectives JSON,
-  skill_development_roadmap JSON,
-  quarterly_focus JSON,
-  created_at DATETIME(6) DEFAULT CURRENT_TIMESTAMP(6),
-  last_updated DATETIME(6),
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
+model Assessment {
+  id                String   @id @default(uuid())
+  userId            String
+  type              AssessmentType
+  rawResults        Json
+  processedInsights Json
+  createdAt         DateTime @default(now())
+  user              User     @relation(fields: [userId], references: [id])
+}
 
--- Coaching Sessions Table 
-CREATE TABLE coaching_sessions (
-  id CHAR(36) PRIMARY KEY DEFAULT UUID(),
-  user_id CHAR(36) NOT NULL,
-  session_date DATETIME(6) NOT NULL,
-  session_type ENUM('quarterly', 'annual') NOT NULL,
-  ai_transcript TEXT,
-  key_insights JSON,
-  recommended_actions JSON,
-  FOREIGN KEY (user_id) REFERENCES users(id)
-);
+enum UserRole {
+  CLIENT
+  ADMIN
+}
+
+enum AssessmentType {
+  BIG_FIVE
+  SIXTEEN_PF
+  HOLLAND_CODE
+  DISC
+  TALENTSMART_EQ
+  CAREER_VALUES
+}
+
+model DevelopmentPlan {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String?
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model QuarterlyReview {
+  id        String   @id @default(uuid())
+  userId    String
+  reviewDate DateTime @default(now())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
 ```
+
 ## V. Development Workflow
 
 ### Phase 1: Foundation and Authentication
-- Set up Next.js project
-- Configure MariaDB 11.3 with Knex.js query builder
-- Implement NextAuth Magic Link flow
-- Create migration for auth schema:
-  ```sql
-  CREATE TABLE verification_tokens (
-    identifier TEXT NOT NULL,
-    expires DATETIME(6) NOT NULL,
-    token TEXT NOT NULL PRIMARY KEY
-  );
-  
-  CREATE INDEX idx_verification_token ON verification_tokens (token);
-  ```
-- Implement session-based middleware
-- Add session callback for user metadata
+- Set up Next.js 15 project with TypeScript and Clerk.com
+- Configure PostgreSQL 17 with Prisma ORM
+- Implement Clerk UserButton and user profile management
 
 ### Phase 2: Assessment and Profiling
-- Develop personality assessment modules
-- Create input interfaces
-- Implement assessment result processing
-- Build initial AI analysis capabilities
+- Develop assessment modules and input interfaces
+- Integrate affiliate links for external assessments
+- Process and store assessment results
 
 ### Phase 3: Development Plan Generation
 - Create markdown generation module
-- Develop AI-assisted goal setting
-- Implement quarterly review mechanisms
-- Build progress tracking system
+- Integrate AI-powered plan refinement (Vercel AI SDK, Grok 3 Mini Beta)
+- Implement quarterly review and progress tracking
 
-### Phase 4: AI Coaching Assistant
-- Integrate AI API
-- Develop conversation flow
-- Create context-aware recommendation system
-- Implement natural language processing
+### Phase 4: Growth Center and AI Assistant
+- Build Growth Center page (self-serve, no coaches)
+- Integrate ReviewInputForm for quarterly reviews
+- Add AI chat assistant for plan refinement and advice
 
 ### Phase 5: Dashboard and Visualizations
-- Design progress tracking UI
-- Implement data visualization
-- Create personalized insights display
-- Develop reporting mechanisms
+- Design dashboard UI for progress tracking and analytics
+- Implement gamified achievements and reporting
 
 ## VI. AI Integration Strategies
 
-### Personality and Goal Analysis
-- Deep analysis of assessment results
-- Contextual goal recommendation
-- Personalized development pathway generation
-
-### Continuous Learning Approaches
-- Adaptive recommendation engine
-- Quarterly goal refinement
-- Proactive skill gap identification
+- Use Vercel AI SDK with Grok 3 Mini Beta for all AI-powered features
+- AI-driven recommendations, plan refinement, and chat assistant
+- Contextual analysis of assessment results and user goals
 
 ## VII. Ethical and Technical Considerations
 
-### Data Privacy and Security
-- End-to-end encryption
-- Anonymized data processing
-- Transparent data usage policies
-
-### AI Bias Mitigation
-- Diverse training data
-- Regular model evaluation
-- Inclusive recommendation strategies
+- End-to-end encryption and secure data storage (PostgreSQL)
+- Anonymized data processing and transparent data usage
+- Regular AI model evaluation and bias mitigation
 
 ## VIII. Potential Challenges and Mitigations
 
-### Technical Challenges
-- AI Response Consistency
-- Complex Recommendation Generation
-- Performance Optimization
-
-### Mitigation Strategies
-- Advanced prompt engineering
-- Modular AI integration
-- Robust error handling
-- Continuous model refinement
+- AI response consistency: advanced prompt engineering and continuous model refinement
+- Performance optimization: server-side rendering, connection pooling, and efficient queries
+- User engagement: gamification and regular check-ins
 
 ## IX. Future Expansion Roadmap
 
-### Short-Term Enhancements
 - Mobile application development
-- Advanced analytics
+- Advanced analytics and reporting
+- Community features and professional networking
 - Enhanced AI coaching capabilities
-
-### Long-Term Vision
-- Community coaching features
-- Global professional network integration
-- Advanced machine learning models
 
 ## X. Implementation Milestones
 
 ### Milestone 1: MVP Development
-- Basic authentication
-- Initial assessment module
-- Simple development plan generation
+- Clerk.com authentication and onboarding
+- Assessment hub and data integration
+- Basic development plan generation
 
 ### Milestone 2: AI Integration
-- Advanced AI coaching assistant
-- Personalized recommendations
-- Quarterly review mechanisms
+- AI-powered plan refinement and chat assistant
+- Quarterly review and progress tracking
 
 ### Milestone 3: Advanced Features
-- Multi-platform support
-- Enhanced visualization
-- Community and networking features
+- Gamified achievements and analytics
+- Mobile and community features
 
 ## XI. Recommended Action Steps
 
-1. Database Migration Setup
-   ```bash
-   npm install knex mysql2
-   npx knex init
-   # Create knexfile.js with MariaDB connection settings
-   ```
-2. NextAuth Configuration
-3. Magic Link Email Server Setup
-4. Session Middleware Implementation
-5. Assessment Module Creation
-6. AI Integration
-7. Development Plan Generator
-8. Dashboard and Tracking Systems
-9. Continuous Testing and Refinement
-10. Documentation Update
+1. Set up PostgreSQL 17 and Prisma ORM
+2. Configure Clerk.com authentication
+3. Build assessment modules and affiliate integration
+4. Implement AI-powered plan generator and chat assistant
+5. Develop Growth Center and dashboard UIs
+6. Integrate quarterly review and progress tracking
+7. Test, document, and deploy
 
 ## XII. Resource Requirements
 
 ### Technical Resources
-- Next.js Developers
-- TypeScript Experts
+- Next.js/React Developers
+- TypeScript and Prisma Experts
 - AI Integration Specialists
 - UX/UI Designers
 - DevOps Engineers
 
 ### Tools and Platforms
-- Development Environments
-- AI API Access
-- Cloud Hosting
-- Monitoring and Analytics Tools
+- Vercel for hosting and deployment
+- PostgreSQL 17 for database
+- Clerk.com for authentication
+- Vercel AI SDK for AI features
+- Monitoring and analytics tools
 
 ---
 
-*Project Plan Generated with AI Coaching Assistant*
-*Last Updated: [AUTO-GENERATED DATE]*
+*Project Plan Updated to Reflect Current Architecture and Self-Serve, AI-Driven Approach*  
+*Last Updated: 2025-04-10*
