@@ -135,14 +135,11 @@ export default function NextFullStepLandingPage() {
             <h1 className="text-4xl md:text-6xl font-extrabold mb-2 text-purple-900 leading-tight">
               Unlock your Next Full Step
             </h1>
-            <h3 className="text-base md:text-lg text-teal-700 mb-2 max-w-xl mx-auto text-center font-semibold">
+            <h3 className="text-2xl md:text-4xl text-teal-700 mb-4 max-w-xl mx-auto text-center font-semibold">
               powered by AI, driven by you
             </h3>
-            <p className="text-base md:text-lg text-gray-700 mb-4 max-w-2xl mx-auto">
-              Self-directed tools for exceptional professional evolution.
-            </p>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Take control of your career path with personalized insights, structured planning, and engaging progress tracking powered by Next Full Step.
+            <p className="text-base md:text-lg text-gray-700 mb-8 max-w-2xl mx-auto text-center">
+              Self-directed tools for exceptional professional evolution. Take control of your career path with personalized insights, structured planning, and engaging progress tracking powered by Next Full Step.
             </p>
             <div className="flex justify-center items-center gap-4 mb-12">
               <Progress value={33} className="w-1/4 h-3 bg-purple-200 [&>div]:bg-gradient-to-r [&>div]:from-orange-400 [&>div]:to-yellow-400" />
