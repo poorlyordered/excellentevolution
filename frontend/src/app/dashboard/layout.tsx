@@ -1,12 +1,19 @@
 import { Metadata } from 'next'
+/**
+ * TODO: Replace with Stack Auth session retrieval logic.
+ * Example: import { getStackAuthSession } from "@/lib/stack-auth";
+ */
+type Session = { user: { id: string } } | null;
 
 export const metadata: Metadata = {
   title: 'Dashboard | Professional Development Platform',
   description: 'Your professional development journey overview',
 }
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+/**
+ * TODO: Replace with Stack Auth session retrieval logic.
+ * Example: import { getStackAuthSession } from "@/lib/stack-auth";
+ */
 import { prisma } from "../../../../lib/prisma";
 import { redirect } from "next/navigation";
 
@@ -16,8 +23,9 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   // Get session
-  const session = await getServerSession(authOptions);
-  const userId = session?.user?.id;
+  // TODO: Replace with Stack Auth session retrieval
+  const session = null as Session; // TODO: Replace with await getStackAuthSession();
+  const userId = session?.user?.id ?? null;
 
   if (!userId) {
     redirect("/login");

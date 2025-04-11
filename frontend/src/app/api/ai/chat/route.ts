@@ -2,8 +2,11 @@
 import { xai } from '@ai-sdk/xai';
 import { streamText, CoreMessage } from 'ai'; // Import CoreMessage
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth'; // TODO: Create this config for NextAuth.js
+/**
+ * TODO: Replace with Stack Auth session retrieval logic.
+ * Example: import { getStackAuthSession } from "@/lib/stack-auth";
+ */
+type Session = { user: { id: string } } | null;
 import { prisma } from '@/lib/prisma';
  // AssessmentType import removed; use string for type
 
@@ -22,7 +25,8 @@ Keep responses concise and focused unless asked for detailed explanations.`;
 export async function POST(req: Request) {
   try {
     // --- 1. Authentication ---
-    const session = await getServerSession(authOptions);
+    // TODO: Replace with Stack Auth session retrieval
+    const session = null as Session; // await getStackAuthSession();
     if (!session?.user?.id) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }

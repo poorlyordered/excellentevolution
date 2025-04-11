@@ -41,20 +41,24 @@ flowchart TD
 
 ### 3.1. Set Up Neon (Database)
 
-1. **Create Neon Account** (https://neon.tech, use GitHub SSO for free-tier benefits).
-2. **Create a Project & Database** (choose region close to your users).
+1. **Create Neon Account** (https://neon.tech, use GitHub SSO for free-tier benefits). Done
+2. **Create a Project & Database** (choose region close to your users). Done
 3. **Enable GitHub Integration**:
-   - Connect Neon to your GitHub repo for branch-based preview DBs.
-   - Configure automatic DB branching for PRs if desired.
-4. **Migrate Schema & Data**:
-   - Export your current Postgres schema/data (e.g., `pg_dump`).
-   - Import into Neon (via Neon dashboard or CLI).
+   - Connect Neon to your GitHub repo for branch-based preview DBs. Done
+   - Configure automatic DB branching for PRs if desired. Done
+4. **Migrate Schema**:
+   - Export your current Postgres schema only (no data) using:
+     `pg_dump -h localhost -U coaching_app_user -d professional_coaching_db -s -f schema.sql`
+   - Import the schema into Neon (via Neon dashboard or CLI).
    - Update your ORM config (e.g., Prisma) with Neon’s connection string (use SSL).
+   - *Note: If you add data in the future, you can repeat this process with a full export/import.*
 5. **Set Up Roles & Security**:
    - Create separate DB users for dev/prod.
    - Enable SSL and restrict access as needed.
 
 ### 3.2. Set Up Stack Auth (Authentication & Email)
+
+> **See also:** [Stack Auth Integration Plan](cline_docs/stack-auth-integration-plan.md) for a detailed step-by-step guide.
 
 1. **Create Stack Auth Account** (e.g., Stytch, Clerk, or similar).
 2. **Configure Application**:
@@ -117,6 +121,12 @@ flowchart TD
    - Merge to main, verify production deploy, DB, and auth.
 4. **Monitor Logs & Errors**:
    - Use Vercel, Neon, and Stack Auth dashboards for monitoring.
+
+---
+
+## Related Documentation
+
+- [Stack Auth Integration Plan](cline_docs/stack-auth-integration-plan.md): Step-by-step instructions for implementing Stack Auth authentication in this project.
 
 ---
 

@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+/**
+ * TODO: Replace with Stack Auth session retrieval logic.
+ * Example: import { getStackAuthSession } from "@/lib/stack-auth";
+ */
+type Session = { user: { email: string } } | null;
 import { prisma } from "@/lib/prisma";
 import path from "path";
 import fs from "fs/promises";
@@ -8,7 +11,8 @@ import fs from "fs/promises";
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions);
+  // TODO: Replace with Stack Auth session retrieval
+  const session = null as Session; // await getStackAuthSession();
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }

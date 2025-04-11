@@ -1,8 +1,11 @@
 // frontend/src/actions/reviewActions.ts
 'use server';
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
+/**
+ * TODO: Replace with Stack Auth session retrieval logic.
+ * Example: import { getStackAuthSession } from "@/lib/stack-auth";
+ */
+type Session = { user: { id: string } } | null;
 import { prisma } from '../../../lib/prisma';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { streamText } from 'ai';
@@ -26,7 +29,8 @@ const ReviewInputSchema = z.object({
  */
 export async function analyzeLatestReview() {
   // --- 1. Authentication ---
-  const session = await getServerSession(authOptions);
+  // TODO: Replace with Stack Auth session retrieval
+  const session = null as Session; // await getStackAuthSession();
   const userId = session?.user?.id;
   if (!userId) {
     // Cannot return NextResponse directly from Server Action, throw error instead
@@ -138,7 +142,8 @@ Provide a concise, structured analysis using Markdown formatting.`;
  */
 export async function createOrUpdateQuarterlyReview(input: z.infer<typeof ReviewInputSchema>) {
   // --- Authentication ---
-  const session = await getServerSession(authOptions);
+  // TODO: Replace with Stack Auth session retrieval
+  const session = null as Session; // await getStackAuthSession();
   const userId = session?.user?.id;
   if (!userId) {
     return { success: false, error: 'Unauthorized: User not logged in.' };
