@@ -35,6 +35,7 @@
   - Custom registration and login flows (API route, password hashing, Stack Auth integration)
 - **Profile completion is now enforced before dashboard access**
 - **Navigation and user flow updated (Growth Center, profile logic, etc.)**
+- **Centralized all environment variables in root .env, .env.local, .env.production, and .env.example; removed frontend/.env* files; documented best practices in cline_docs/env-file-management-best-practices.md**
 
 ## What's Left to Build
 - Implement assessment entry forms and API/database integration for all required assessments
@@ -50,6 +51,7 @@
 - Memory Bank documentation updated
 - **Assessment suite, navigation, and user flow now fully aligned with project brief**
 - **Profile completion enforcement and navigation improvements in place**
+- **Environment variable management consolidated and documented; all .env files now in root**
 - Awaiting further direction for new features or enhancements
 
 ## Known Issues
@@ -69,3 +71,4 @@
 - **Enforced profile completion before dashboard access**
 - **Aligned navigation and user flow with updated requirements**
 - **Switched backend database from MariaDB to Neon (managed Postgres) for improved compatibility, scalability, and GitHub-integrated preview environments**
+- **Centralized environment variable management in root .env files; removed frontend/.env* files**

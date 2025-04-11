@@ -15,6 +15,7 @@
 - Local dev: Node.js, Vercel CLI, TypeScript compiler, Neon (managed Postgres, dev branch)
 - CI/CD: Vercel Git integration for auto-deploys.
 - IDE: VS Code with TypeScript, ESLint, Tailwind extensions.
+- **Environment Variables:** All environment variables are now managed in the project root using `.env`, `.env.local`, `.env.production`, and `.env.example`. All frontend/.env* files have been removed. Best practices are documented in `cline_docs/env-file-management-best-practices.md`.
 
 ## Technical Constraints
 - Relies on external assessment platforms and affiliate links.

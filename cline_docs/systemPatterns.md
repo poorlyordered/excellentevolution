@@ -11,6 +11,7 @@
 - Shadcn UI/Radix UI with Tailwind CSS for reusable, styled components.
 - Stack Auth for authentication, user management, and transactional email.
 - Neon (managed Postgres) for all database operations, managed via Prisma ORM.
+- **All environment variables are now managed in the project root using `.env`, `.env.local`, `.env.production`, and `.env.example`. All frontend/.env* files have been removed. Best practices are documented in `cline_docs/env-file-management-best-practices.md`.**
 
 ## Design Patterns in Use
 - **Component-Based:** Reusable UI elements (e.g., score entry, gamification widgets)
@@ -23,6 +24,7 @@
   - Direct Prisma Client usage within Next.js API Routes/Server Actions
   - Connection pooling for performance (managed by Prisma Client)
   - Parameterized queries (handled by Prisma Client)
+- **Environment Variable Management:** All environment variables are consolidated in the root. No environment files exist in frontend/.env*; all configuration is managed via root .env files.
 
 ## Component Relationships
 - Next.js Pages → React Components (Shadcn UI/Radix UI) → Tailwind CSS styling

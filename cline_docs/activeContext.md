@@ -8,6 +8,7 @@
 - Assessment suite refactor: removed MBTI, Enneagram, StrengthsFinder; scaffolded required assessments per project brief
 - Profile completion enforcement on first login/registration
 - Navigation and user flow alignment with updated requirements
+- **Environment variable management consolidation and documentation (.env, .env.local, .env.production, .env.example now in root; frontend/.env* files removed)**
 - Awaiting further direction for next feature development (calendar integration and Playwright testing remain postponed/paused)
 
 ## Recent Changes
@@ -22,7 +23,7 @@
   - Larger, centered subtitle: "powered by AI, driven by you"
   - Combined supporting text into a single paragraph
 - Dashboard improvements:
-net  - Personalized welcome message ("Welcome {user.firstName}")
+  - Personalized welcome message ("Welcome {user.firstName}")
 - General UI/UX refinements per iterative user feedback
 - Committed and pushed all changes to remote repository
 - **Assessment suite now matches project brief:** Big Five (OCEAN), 16PF, Holland Code (RIASEC), DiSC, TalentSmartEQ EI Appraisal, Career Values Scale
@@ -32,6 +33,7 @@ net  - Personalized welcome message ("Welcome {user.firstName}")
 - **Prisma schema and client updated and synced for all required assessment types**
 - **Profile completion is now enforced before dashboard access**
 - **Navigation and user flow updated (Growth Center, profile logic, etc.)**
+- **Consolidated all environment variables into root .env, .env.local, .env.production, and .env.example; removed frontend/.env* files; documented best practices in cline_docs/env-file-management-best-practices.md**
 
 ## Next Steps
 - Implement assessment entry forms and API/database integration for all required assessments
@@ -49,6 +51,7 @@ net  - Personalized welcome message ("Welcome {user.firstName}")
 - Consideration: Balance between structure and customization in templates
 - Decision: Use Playwright for integration testing (setup complete, implementation paused)
 - Decision: Use direct Prisma Client access from Next.js backend instead of separate MCP server for database operations
+- **Decision: Centralize all environment variables in root .env files; remove frontend/.env* files; document best practices**
 
 ## Important Patterns and Preferences
 - Pattern: Separate data processing (markdown generator) from presentation (viewer)
@@ -65,3 +68,4 @@ net  - Personalized welcome message ("Welcome {user.firstName}")
 - Playwright offers robust features for testing modern web apps (auto-waits, cross-browser)
 - Keeping schema, client, and codebase in sync is critical for rapid iteration
 - Enforcing user flow and profile completion improves onboarding and data quality
+- **Centralized .env management reduces confusion, improves security, and streamlines deployment**
