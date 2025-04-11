@@ -4,17 +4,15 @@
 - **Frontend:** React 19, Next.js 15 (App Router), TypeScript.
 - **UI:** Shadcn UI, Radix UI, Tailwind CSS.
 - **AI:** Vercel AI SDK with Grok 3 Mini Beta LLM (`@ai-sdk/xai`).
-- **Auth:** NextAuth.js (credentials provider, Prisma adapter) for user authentication and profile management.
-- **Email:** Resend for transactional emails
+- **Auth:** Stack Auth for user authentication, profile management, and transactional email.
 - **Hosting:** Vercel for deployment and scaling.
 - **Database:**
-  - PostgreSQL 17 for local development
-  - Neon (managed PostgreSQL SaaS) for production
+  - Neon (managed Postgres) for all environments (production and development, with branching for local/dev)
   - Direct Prisma Client usage in Next.js backend
   - Prisma ORM for type-safe queries
 
 ## Development Setup
-- Local dev: Node.js, Vercel CLI, TypeScript compiler, PostgreSQL 17
+- Local dev: Node.js, Vercel CLI, TypeScript compiler, Neon (managed Postgres, dev branch)
 - CI/CD: Vercel Git integration for auto-deploys.
 - IDE: VS Code with TypeScript, ESLint, Tailwind extensions.
 
@@ -28,14 +26,14 @@
 - Libraries:
   - Vercel AI SDK (`ai`, `@ai-sdk/xai`)
   - Radix UI primitives (`@radix-ui/react-slot`, `@radix-ui/react-scroll-area`)
-  - NextAuth.js, Resend SDK, Sonner (notifications), Lucide React (icons)
-  - PostgreSQL Node.js driver
+  - Stack Auth SDK, Sonner (notifications), Lucide React (icons)
+  - Neon/Postgres Node.js driver
   - Model Context Protocol SDK
 
 ## Tool Usage Patterns
 - TypeScript for strict typing in React 19 components
 - Vercel AI SDK (`streamText` with `xai` provider) for AI chat and plan refinement via API routes
 - Vercel AI SDK (`useChat` hook) for managing chat state in the frontend
-- NextAuth.js session for user profile/account management
+- Stack Auth session for user profile/account management
 - Tailwind CSS for rapid, responsive styling with Shadcn UI
 - **Testing:** Playwright for integration and end-to-end testing.

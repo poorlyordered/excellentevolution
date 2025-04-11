@@ -13,7 +13,7 @@ A comprehensive platform for professional development, coaching, and personal gr
 ## Prerequisites
 
 - Node.js (v18 or higher)
-- MySQL/MariaDB
+- Neon (managed Postgres)
 - Git
 
 ## Setup Instructions
@@ -33,10 +33,6 @@ cp .env.example .env
 # Frontend
 cd frontend
 cp .env.example .env.local
-
-# Webhook server
-cd ../webhook-server
-cp .env.example .env
 ```
 
 3. Install dependencies:
@@ -45,18 +41,12 @@ cp .env.example .env
 cd frontend
 npm install
 
-# Webhook server
-cd ../webhook-server
-npm install
-```
 
 4. Set up the database:
 ```bash
-# Run database migrations
-cd db
-mysql -u [username] -p [database_name] < migrations/001_initial_schema.sql
-mysql -u [username] -p [database_name] < migrations/002_mariadb_assessments_schema.sql
-mysql -u [username] -p [database_name] < migrations/003_mariadb_users_schema.sql
+# Run database migrations (using Prisma with Neon)
+cd frontend
+npx prisma migrate deploy
 ```
 
 5. Start the development servers:
@@ -64,23 +54,14 @@ mysql -u [username] -p [database_name] < migrations/003_mariadb_users_schema.sql
 # Frontend (from frontend directory)
 npm run dev
 
-# Webhook server (from webhook-server directory)
-npm run dev
-```
 
 ## Environment Configuration
 
 ### Frontend (.env.local)
-- `DATABASE_URL`: MySQL connection string
-- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`: Clerk public key
-- `CLERK_SECRET_KEY`: Clerk secret key
-- `CLERK_WEBHOOK_SECRET`: Webhook secret for Clerk
-- `RESEND_API_KEY`: API key for email service
+- `DATABASE_URL`: Neon (Postgres) connection string
+- `STACKAUTH_PUBLIC_KEY`: Stack Auth public key
+- `STACKAUTH_SECRET_KEY`: Stack Auth secret key
 
-### Webhook Server (.env)
-- `PORT`: Server port (default: 3001)
-- `CLERK_WEBHOOK_SECRET`: Webhook secret for Clerk
-- `FORWARD_URL`: URL to forward webhooks to
 
 ## Development Workflow
 

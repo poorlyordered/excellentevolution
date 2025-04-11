@@ -31,8 +31,8 @@
   - Combined supporting text into a single paragraph
 - Dashboard improvements:
   - Personalized welcome message ("Welcome {user.firstName}")
-  - NextAuth.js authentication (credentials provider, Prisma adapter)
-  - Custom registration and login flows (API route, password hashing)
+  - Stack Auth authentication and user management (custom registration and login flows, transactional email)
+  - Custom registration and login flows (API route, password hashing, Stack Auth integration)
 - **Profile completion is now enforced before dashboard access**
 - **Navigation and user flow updated (Growth Center, profile logic, etc.)**
 
@@ -46,7 +46,7 @@
 ## Current Status
 - All AI features migrated to Grok 3 Mini Beta via Vercel AI SDK
 - UI/UX improvements deployed (landing page, dashboard)
-- **Backend database successfully migrated to PostgreSQL 17 (Neon SaaS for production)**
+- **Backend database successfully migrated to Neon (managed Postgres, SaaS for production and development)**
 - Memory Bank documentation updated
 - **Assessment suite, navigation, and user flow now fully aligned with project brief**
 - **Profile completion enforcement and navigation improvements in place**
@@ -59,7 +59,7 @@
 
 ## Evolution of Project Decisions
 - Migrated all AI features to Grok 3 Mini Beta via Vercel AI SDK
-- Migrated authentication from Clerk to NextAuth.js (custom registration/login, credentials provider, Prisma adapter)
+- Migrated authentication from Clerk and NextAuth.js to Stack Auth (custom registration/login, user sync to Neon, transactional email)
 - Added professional development planning as core feature
 - Using editable Markdown for flexibility
 - Separated data processing from presentation
@@ -68,4 +68,4 @@
 - **Removed MBTI, Enneagram, StrengthsFinder; strictly following project brief for assessment suite**
 - **Enforced profile completion before dashboard access**
 - **Aligned navigation and user flow with updated requirements**
-- **Switched backend database from MariaDB to PostgreSQL 17 for improved compatibility and future scalability (Neon SaaS for production)**
+- **Switched backend database from MariaDB to Neon (managed Postgres) for improved compatibility, scalability, and GitHub-integrated preview environments**

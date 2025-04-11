@@ -54,7 +54,7 @@ To empower professionals, career changers, leadership aspirants, personal develo
 ### Functional Requirements
 
 #### 1. Authentication & User Management
-- **User Registration and Login:** Secure sign-up/login with Clerk.com authentication (email/password, OAuth 2.0 providers).
+- **User Registration and Login:** Secure sign-up/login with Stack Auth (email/password, OAuth 2.0 providers, transactional email).
 - **Profile Management:** Edit personal details, assessment scores, and goals.
 - **Privacy Settings:** Options to control data visibility (e.g., coach-only, private).
 - **Role-Based Access Control:** Differentiate between users (clients) and coaches.
@@ -110,21 +110,21 @@ To empower professionals, career changers, leadership aspirants, personal develo
 
 #### 3. Security
 - **Data Storage:** Encrypted at rest using AWS KMS.
-- **Authentication:** Clerk.com implementation with secure session management.
+- **Authentication:** Stack Auth implementation with secure session management and transactional email.
 - **Privacy Controls:** Granular user permissions for data sharing.
 - **Compliance:** Adheres to GDPR and CCPA standards.
 
 #### 4. Technical Architecture
 - **Frontend:** Next.js 15 (App Router) with React 19 and TypeScript.
 - **Backend:** Next.js API routes for server-side logic.
-- **Database:** MariaDB for relational data with JSON support.
+- **Database:** Neon (managed Postgres) for relational data with JSON support.
 - **AI/ML:** Vercel AI SDK with Sonnet 3.7 LLM.
 - **Cloud/Deployment:** Vercel for hosting and scaling.
 - **APIs:** RESTful for integrations (e.g., Google Calendar, Resend).
 
 ### Integrations
 - **Calendar Systems:** Google Calendar API for scheduling.
-- **Email Notifications:** Resend for transactional emails with React email templates.
+- **Email Notifications:** Stack Auth for transactional emails.
 - **Document Generation:** Exportable PDF reports via API (e.g., pdfkit).
 - **Analytics Tools:** Mixpanel for user behavior tracking.
 - **Learning Platforms:** Future integration with platforms like Coursera.
@@ -139,7 +139,7 @@ To empower professionals, career changers, leadership aspirants, personal develo
 ## Dependencies
 - Availability of external assessment platforms (e.g., Truity, TalentSmartEQ).
 - Affiliate partnerships for referral links.
-- AWS infrastructure setup and maintenance.
+- Vercel and GitHub integration for hosting, CI/CD, and preview environments.
 
 ## Risks and Mitigations
 - **Risk:** Users misenter scores from external tests.

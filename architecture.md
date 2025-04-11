@@ -4,7 +4,7 @@
 %% Information Architecture Diagram
 graph TD
     A[User] --> B[Authentication]
-    B -->|Clerk.com| C[Frontend]
+    B -->|Stack Auth| C[Frontend]
     C --> D[App Router]
     D --> E[Dashboard]
     D --> F[Assessments]
@@ -24,7 +24,7 @@ graph TD
     
     N --> Q[Database]
     Q --> R[Prisma ORM]
-    Q --> S[MariaDB]
+    Q --> S[Neon (Postgres)]
     
     I --> T[Gamification Elements]
     L --> U[Analytics]
@@ -34,9 +34,9 @@ graph TD
 ## Core Components
 
 ### 1. Authentication Layer
-- **Clerk.com Integration**: Handles user signup/login flows
+- **Stack Auth Integration**: Handles user signup/login flows, transactional email, and user profile management
 - **Middleware**: Next.js middleware.ts for route protection
-- **Session Management**: JWT token handling via Clerk provider
+- **Session Management**: Session and JWT handling via Stack Auth provider
 
 ### 2. Frontend Structure
 ```plaintext
@@ -50,13 +50,13 @@ src/app/
 ├── assessments/            # Assessment flows
 ├── development/            # Planning tools
 ├── coaching/               # Session management
-└── layout.tsx              # Root layout with ClerkProvider
+└── layout.tsx              # Root layout with StackAuthProvider
 ```
 
 ### 3. Data Flow Pipeline
 1. User interaction triggers API route
 2. Vercel AI SDK processes request with Sonnet 3.7 LLM
-3. Database updates via Prisma ORM
+3. Database updates via Prisma ORM (Neon managed Postgres)
 4. UI updates through React state management
 
 ## Gap Analysis

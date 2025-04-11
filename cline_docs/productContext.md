@@ -13,10 +13,12 @@ Professionals often lack accessible, self-directed tools to guide their career g
 - AI (Grok 3 Mini Beta via Vercel AI SDK) generates personalized recommendations, visualized in standard or gamified views (e.g., levels, badges).
 - Calendar integration schedules check-ins for goal updates and reflection.
 - Progress is tracked quarterly, with exportable summaries.
+- All user data and progress are securely stored in Neon (managed Postgres), with authentication and transactional email powered by Stack Auth.
+- The platform is hosted and deployed via Vercel, with GitHub integration for CI/CD and preview environments.
 
 ## User Experience Goals
 - Sleek, self-guided interface with mobile responsiveness (Next.js 15, Shadcn UI, Radix UI, Tailwind CSS).
 - Intuitive flow with optional gamification (e.g., progress bars, achievements).
 - Accessible design (WCAG 2.1) with clear calendar prompts.
-- User avatar/profile management via Clerk UserButton.
+- User avatar/profile management via Stack Auth.
 - Transparent affiliate links for assessments and future courses (e.g., Udemy).

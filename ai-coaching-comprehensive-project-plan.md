@@ -10,11 +10,11 @@ A self-serve, AI-powered professional development platform that empowers users t
 ### Technology Stack
 - **Frontend**: Next.js 15 (App Router), React 19, TypeScript
 - **State Management**: Zustand
-- **Authentication**: NextAuth.js (credentials provider, Prisma adapter) for user authentication and profile management
+- **Authentication**: Stack Auth for user authentication, profile management, and transactional email
 - **AI Integration**: Vercel AI SDK with Grok 3 Mini Beta LLM (`@ai-sdk/xai`)
-- **Database**: PostgreSQL 17 (local and production) via Prisma ORM
+- **Database**: Neon (managed Postgres, all environments) via Prisma ORM
 - **Styling/UI**: Tailwind CSS, Shadcn UI, Radix UI
-- **Email**: Resend (transactional emails)
+- **Email**: Stack Auth (transactional emails)
 - **Hosting**: Vercel
 
 ### Project Structure
@@ -56,8 +56,8 @@ coaching-app/
 ## III. Core Features and Modules
 
 ### 1. User Authentication and Onboarding
-- NextAuth.js authentication (custom registration and login flows, credentials provider, Prisma adapter)
-- User profile management via NextAuth.js session (name, email)
+- Stack Auth authentication (custom registration and login flows, user sync to Neon, transactional email)
+- User profile management via Stack Auth session (name, email)
 - Guided onboarding with initial assessment workflow
 
 ### 2. Assessment Hub
@@ -146,9 +146,9 @@ model QuarterlyReview {
 ## V. Development Workflow
 
 ### Phase 1: Foundation and Authentication
-- Set up Next.js 15 project with TypeScript and Clerk.com
-- Configure PostgreSQL 17 with Prisma ORM
-- Implement Clerk UserButton and user profile management
+- Set up Next.js 15 project with TypeScript and Stack Auth
+- Configure Neon (managed Postgres) with Prisma ORM
+- Implement Stack Auth user profile management
 
 ### Phase 2: Assessment and Profiling
 - Develop assessment modules and input interfaces
@@ -197,7 +197,7 @@ model QuarterlyReview {
 ## X. Implementation Milestones
 
 ### Milestone 1: MVP Development
-- Clerk.com authentication and onboarding
+- Stack Auth authentication and onboarding
 - Assessment hub and data integration
 - Basic development plan generation
 
@@ -211,8 +211,8 @@ model QuarterlyReview {
 
 ## XI. Recommended Action Steps
 
-1. Set up PostgreSQL 17 and Prisma ORM
-2. Configure Clerk.com authentication
+1. Set up Neon (managed Postgres) and Prisma ORM
+2. Configure Stack Auth authentication
 3. Build assessment modules and affiliate integration
 4. Implement AI-powered plan generator and chat assistant
 5. Develop Growth Center and dashboard UIs
@@ -230,8 +230,8 @@ model QuarterlyReview {
 
 ### Tools and Platforms
 - Vercel for hosting and deployment
-- PostgreSQL 17 for database
-- Clerk.com for authentication
+- Neon (managed Postgres) for database
+- Stack Auth for authentication and transactional email
 - Vercel AI SDK for AI features
 - Monitoring and analytics tools
 
