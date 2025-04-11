@@ -8,7 +8,8 @@
 - **Email:** Resend for transactional emails
 - **Hosting:** Vercel for deployment and scaling.
 - **Database:**
-  - PostgreSQL 17 for local development and production
+  - PostgreSQL 17 for local development
+  - Neon (managed PostgreSQL SaaS) for production
   - Direct Prisma Client usage in Next.js backend
   - Prisma ORM for type-safe queries
 

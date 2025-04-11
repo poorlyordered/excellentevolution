@@ -1,8 +1,9 @@
 // frontend/src/actions/reviewActions.ts
 'use server';
 
-import { auth } from '@clerk/nextjs/server';
-import { prisma } from '@/lib/prisma';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { prisma } from '../../../lib/prisma';
 import { createAnthropic } from '@ai-sdk/anthropic';
 import { streamText } from 'ai';
 import { z } from 'zod'; // Import Zod
@@ -25,7 +26,8 @@ const ReviewInputSchema = z.object({
  */
 export async function analyzeLatestReview() {
   // --- 1. Authentication ---
-  const { userId } = await auth();
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
   if (!userId) {
     // Cannot return NextResponse directly from Server Action, throw error instead
     // Throwing might not be ideal if we want to return structured errors.
@@ -136,7 +138,8 @@ Provide a concise, structured analysis using Markdown formatting.`;
  */
 export async function createOrUpdateQuarterlyReview(input: z.infer<typeof ReviewInputSchema>) {
   // --- Authentication ---
-  const { userId } = await auth();
+  const session = await getServerSession(authOptions);
+  const userId = session?.user?.id;
   if (!userId) {
     return { success: false, error: 'Unauthorized: User not logged in.' };
   }

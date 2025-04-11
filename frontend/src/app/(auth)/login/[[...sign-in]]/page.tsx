@@ -1,4 +1,5 @@
 'use client'
+import Link from "next/link";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -70,6 +71,20 @@ export default function LoginPage() {
           </button>
         </form>
         {error && <div className="text-red-600 text-center">{error}</div>}
+        <div className="mt-8 flex flex-col items-center gap-2">
+          <Link
+            href="/"
+            className="text-blue-700 hover:underline text-sm font-medium transition-colors duration-200"
+          >
+            &larr; Back to Home
+          </Link>
+          <Link
+            href="/register"
+            className="text-teal-700 hover:underline text-sm font-medium transition-colors duration-200"
+          >
+            Don&apos;t have an account? Sign Up
+          </Link>
+        </div>
       </div>
     </div>
   );

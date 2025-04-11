@@ -1,36 +1,43 @@
 flowchart TD
     Start[User Lands on Platform] --> Auth{Authenticated?}
     Auth -->|No| Login[Login/Register Page]
-    Login -->|Success| Dashboard
-    Auth -->|Yes| Dashboard[Dashboard]
-    
+    Login -->|Success| ProfileCheck{Profile Complete?}
+    Auth -->|Yes| ProfileCheck
+    ProfileCheck -->|No| ProfileCompletion[Complete Profile]
+    ProfileCheck -->|Yes| Dashboard[Dashboard]
+    ProfileCompletion --> Dashboard
+
     Dashboard --> AssessmentFlow[Take Assessments]
     Dashboard --> ViewProgress[View Progress]
     Dashboard --> UpdateGoals[Update Goals]
-    
+    Dashboard --> Profile[Profile (Accessible from Header)]
+    Dashboard --> GrowthCenter[Growth Center]
+
     AssessmentFlow --> BigFive[Big Five (OCEAN)]
     AssessmentFlow --> SixteenPF[16PF (Optional)]
     AssessmentFlow --> HollandCode[Holland Code (RIASEC)]
     AssessmentFlow --> DiSC[DiSC]
     AssessmentFlow --> TalentSmartEQ[TalentSmartEQ EI Appraisal]
     AssessmentFlow --> CareerValues[Career Values Scale]
-    
+
     BigFive & SixteenPF & HollandCode & DiSC & TalentSmartEQ & CareerValues --> Analysis[AI Analysis]
     Analysis --> Insights[Personalized Insights]
-    
+
     Insights --> DevelopmentPlan[Development Plan Generation]
     DevelopmentPlan --> Goals[Goal Setting]
-    
+
     Goals --> QuarterlyReview[Quarterly Review]
     QuarterlyReview --> Progress[Progress Tracking]
     Progress --> Recommendations[AI Recommendations]
-    
+
     Recommendations --> UpdateGoals
-    
     Recommendations --> AICoachChat[Interact with AI Coach]
     AICoachChat --> UpdateGoals
-    
+
     style Start fill:#f9f,stroke:#333
     style Dashboard fill:#bbf,stroke:#333
     style Analysis fill:#bfb,stroke:#333
     style DevelopmentPlan fill:#fbf,stroke:#333
+    style ProfileCompletion fill:#ffb,stroke:#333
+    style Profile fill:#ffd,stroke:#333
+    style GrowthCenter fill:#cff,stroke:#333

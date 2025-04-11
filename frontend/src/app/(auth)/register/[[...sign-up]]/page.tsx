@@ -1,5 +1,6 @@
 'use client'
 
+import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -31,7 +32,7 @@ export default function RegisterPage() {
 
     if (res.ok) {
       setSuccess(true);
-      setTimeout(() => router.push("/login"), 1500);
+      setTimeout(() => router.push("/profile"), 1500);
     } else {
       setError(data.error || "Registration failed.");
     }
@@ -82,7 +83,21 @@ export default function RegisterPage() {
           </button>
         </form>
         {error && <div className="text-red-600 text-center">{error}</div>}
-        {success && <div className="text-green-600 text-center">Registration successful! Redirecting...</div>}
+        {success && <div className="text-green-600 text-center">Registration successful! Redirecting to your profile...</div>}
+        <div className="mt-8 flex flex-col items-center gap-2">
+          <Link
+            href="/"
+            className="text-blue-700 hover:underline text-sm font-medium transition-colors duration-200"
+          >
+            &larr; Back to Home
+          </Link>
+          <Link
+            href="/login"
+            className="text-teal-700 hover:underline text-sm font-medium transition-colors duration-200"
+          >
+            Already have an account? Log In
+          </Link>
+        </div>
       </div>
     </div>
   );

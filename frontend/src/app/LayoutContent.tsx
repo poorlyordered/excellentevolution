@@ -15,7 +15,7 @@ export default function LayoutContent({
     { href: '/dashboard', label: 'Dashboard' },
     { href: '/assessments', label: 'Assessments' },
     { href: '/development', label: 'Development' },
-    { href: '/coaching', label: 'Coaching' },
+    { href: '/coaching', label: 'Growth Center' },
     { href: '/reports', label: 'Reports' },
   ];
   return (
@@ -50,15 +50,17 @@ export default function LayoutContent({
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:items-center">
                   <div className="relative ml-3">
-                    <div>
-                      <button
-                        type="button"
-                        className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                      >
-                        <span className="sr-only">Open user menu</span>
-                        <div className="h-8 w-8 rounded-full bg-gray-200"></div>
-                      </button>
-                    </div>
+                    <Link
+                      href="/profile"
+                      className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                      title="View Profile"
+                    >
+                      <span className="sr-only">Go to profile</span>
+                      <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
+                        {/* Optionally, user initials or avatar can go here */}
+                        P
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>

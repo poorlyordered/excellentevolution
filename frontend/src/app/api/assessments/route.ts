@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAssessment, getUserAssessments, withErrorHandling } from '@/lib/db';
-import type { AssessmentType } from '@/lib/db';
+import { AssessmentType } from '@prisma/client';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate assessment type
-    if (!['MBTI', 'Enneagram', 'StrengthsFinder'].includes(type)) {
+    if (![AssessmentType.MBTI, AssessmentType.Enneagram, AssessmentType.StrengthsFinder, AssessmentType.BIG_FIVE].includes(type)) {
       return NextResponse.json(
         { error: 'Invalid assessment type' },
         { status: 400 }
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
 function validateRawResults(type: AssessmentType, rawResults: unknown): string | null {
   try {
     switch (type) {
-      case 'MBTI': {
+      case AssessmentType.MBTI: {
         const results = rawResults as { scores?: Record<string, number>; type?: unknown };
         const { scores, type: mbtiType } = results;
         if (!scores || !mbtiType || typeof mbtiType !== 'string') {
@@ -95,7 +95,7 @@ function validateRawResults(type: AssessmentType, rawResults: unknown): string |
         }
         break;
       }
-      case 'Enneagram': {
+      case AssessmentType.Enneagram: {
         const results = rawResults as { type?: number; wing?: number; scores?: Record<number, number> };
         const { type: enneagramType, wing, scores } = results;
         if (
@@ -114,7 +114,7 @@ function validateRawResults(type: AssessmentType, rawResults: unknown): string |
         }
         break;
       }
-      case 'StrengthsFinder': {
+      case AssessmentType.StrengthsFinder: {
         const results = rawResults as { strengths?: string[]; scores?: Record<string, number> };
         const { strengths, scores } = results;
         if (
@@ -126,6 +126,17 @@ function validateRawResults(type: AssessmentType, rawResults: unknown): string |
         }
         if (!strengths.every(s => typeof s === 'string')) {
           return 'Invalid strengths format';
+        }
+        break;
+      }
+      case AssessmentType.BIG_FIVE: {
+        // Accept any object with at least the main five traits as numbers
+        const results = rawResults as Record<string, number>;
+        const requiredTraits = [
+          'openness', 'conscientiousness', 'extraversion', 'agreeableness', 'neuroticism'
+        ];
+        if (!requiredTraits.every(trait => typeof results[trait] === 'number')) {
+          return 'Invalid Big Five results structure';
         }
         break;
       }

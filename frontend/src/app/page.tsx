@@ -145,17 +145,24 @@ export default function NextFullStepLandingPage() {
               <Progress value={33} className="w-1/4 h-3 bg-purple-200 [&>div]:bg-gradient-to-r [&>div]:from-orange-400 [&>div]:to-yellow-400" />
               <span className="text-sm font-medium text-purple-700">Your Journey Begins...</span>
             </div>
-            <Link href="/sign-in" passHref legacyBehavior>
-              <Button
-                size="lg"
-                className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
-                asChild
-              >
-                <a>
-                  Sign Up / Log In <Rocket className="ml-2 h-5 w-5" />
+            <div className="flex flex-col items-center mb-12">
+              <Link href="/register" passHref legacyBehavior>
+                <Button
+                  size="lg"
+                  className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 text-lg font-semibold rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105"
+                  asChild
+                >
+                  <a>
+                    Sign Up <Rocket className="ml-2 h-5 w-5" />
+                  </a>
+                </Button>
+              </Link>
+              <Link href="/login" passHref legacyBehavior>
+                <a className="mt-4 text-teal-700 hover:underline text-base font-medium transition-colors duration-200">
+                  Existing Users? Log In
                 </a>
-              </Button>
-            </Link>
+              </Link>
+            </div>
           </div>
         </section>
 
